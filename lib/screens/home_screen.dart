@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:summit_admin_app/components/admit_tile.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,37 +14,38 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("IEDC-Summit"),
+        centerTitle: true,
+      ),
       body: Center(
         child: Column(
           children: [
             Expanded(
-              child: MobileScanner(
-                fit: BoxFit.fill,
-                controller: MobileScannerController(
-                  detectionSpeed: DetectionSpeed.normal,
-                  facing: CameraFacing.back,
-                  torchEnabled: false,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: MobileScanner(
+                  fit: BoxFit.fill,
+                  controller: MobileScannerController(
+                    detectionSpeed: DetectionSpeed.normal,
+                    facing: CameraFacing.back,
+                    torchEnabled: false,
+                  ),
+                  onDetect: (capture) {
+                    setState(
+                      () {
+                        result = capture.barcodes[0].rawValue.toString();
+                      },
+                    );
+                  },
                 ),
-                onDetect: (capture) {
-                  setState(
-                    () {
-                      result = capture.barcodes[0].rawValue.toString();
-                    },
-                  );
-                },
               ),
             ),
             Expanded(
               child: Center(
-                child: Text(
-                  result,
-                  style: const TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+                  child: AdmitTile(
+                barId: result,
+              )),
             ),
           ],
         ),
