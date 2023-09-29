@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:summit_admin_app/screens/home_screen.dart';
+import 'package:summit_admin_app/theme/pallete.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,10 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: Pallete.darkModeAppTheme,
       home: const HomeScreen(),
     );
   }

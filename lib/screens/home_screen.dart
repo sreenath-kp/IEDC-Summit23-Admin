@@ -34,12 +34,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Expanded(
-              child: Text(
-                result,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+              child: Center(
+                child: Text(
+                  result,
+                  style: const TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
