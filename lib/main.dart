@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'package:summit_admin_app/screens/home_screen.dart';
+import 'package:summit_admin_app/screens/qrcode_scan_screen.dart';
 import 'package:summit_admin_app/theme/pallete.dart';
 
 void main() async {
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: Pallete.darkModeAppTheme,
-      home: const HomeScreen(),
+      home: const QRCodeScanScreen(),
     );
   }
 }
