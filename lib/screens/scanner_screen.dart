@@ -35,6 +35,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
                     setState(
                       () {
                         result = capture.barcodes[0].rawValue.toString();
+                        print(result);
                       },
                     );
                   },
