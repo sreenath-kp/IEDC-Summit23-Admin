@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:summit_admin_app/components/home_button.dart';
+import 'package:summit_admin_app/providers/firebase_providers.dart';
+import 'package:summit_admin_app/respository/townscript_repo.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   String result = " ";
   @override
   Widget build(BuildContext context) {
@@ -37,6 +40,16 @@ class _HomeScreenState extends State<HomeScreen> {
               title: "WorkShop Attendence",
               func: () {
                 null;
+              },
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            HomeButton(
+              title: "Upload firebase",
+              func: () {
+                TownscriptRepository(firestore: ref.watch(firestoreProvider))
+                    .gettingData();
               },
             ),
           ],

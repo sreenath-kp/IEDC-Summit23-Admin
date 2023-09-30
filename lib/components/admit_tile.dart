@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:summit_admin_app/providers/firebase_providers.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:summit_admin_app/providers/firebase_providers.dart';
 import 'package:summit_admin_app/respository/townscript_repo.dart';
 
-class AdmitTile extends StatelessWidget {
+class AdmitTile extends ConsumerWidget {
   final String barId;
 
   const AdmitTile({super.key, required this.barId});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -40,9 +40,7 @@ class AdmitTile extends StatelessWidget {
             Icons.done,
             color: Colors.greenAccent,
           ),
-          onPressed: () {
-            TowscriptRepository().gettingData();
-          },
+          onPressed: () {},
         ),
       ),
     );

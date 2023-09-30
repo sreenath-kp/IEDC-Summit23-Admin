@@ -1,13 +1,28 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'package:summit_admin_app/constants/secret.dart';
+import 'package:summit_admin_app/models/attendee_model.dart';
 
-class TowscriptRepository {
-  // final FirebaseFirestore _firestore;
+class TownscriptRepository {
+  final FirebaseFirestore _firestore;
+  TownscriptRepository({
+    required FirebaseFirestore firestore,
+  }) : _firestore = firestore;
 
-  // TowscriptRepository({
-  //   required FirebaseFirestore firestore,
-  // }) : _firestore = firestore;
+  Future<void> uploadtoFirebase(Attendee attendee) async {
+    try {
+      await _firestore
+          .collection('attendees')
+          .doc(attendee.iedcRegistrationNumber)
+          .set(
+            attendee.toMap(),
+          );
+      print("success");
+    } catch (e) {
+      print("failed to upload");
+    }
+  }
 
   Future<void> gettingData() async {
     final response = await http.get(
@@ -16,35 +31,25 @@ class TowscriptRepository {
       ),
       headers: requestHeaders,
     );
-    var data = jsonDecode(response.body);
-
-    var data1 = jsonDecode(data["data"]);
-    // print(data1);
-    for (var d in data1) {
-      print(d["answerList"][0]["question"]);
-      print(d["answerList"][0]["answer"]);
-      print(d["answerList"][1]["question"]);
-      print(d["answerList"][1]["answer"]);
-      print(d["answerList"][2]["question"]);
-      print(d["answerList"][2]["answer"]);
-      print(d["answerList"][3]["question"]);
-      print(d["answerList"][3]["answer"]);
-      print(d["answerList"][4]["question"]);
-      print(d["answerList"][4]["answer"]);
-      print(d["answerList"][5]["question"]);
-      print(d["answerList"][5]["answer"]);
-      print(d["answerList"][6]["question"]);
-      print(d["answerList"][6]["answer"]);
-      print(d["answerList"][7]["question"]);
-      print(d["answerList"][7]["answer"]);
-      // print(d["answerList"][8]["answer"]);
-      // print(d["answerList"][9]["answer"]);
-      print(d["userName"]);
-      print(d["userEmailId"]);
-      print(d["allTicketName"]);
-      print(d["ticketCurrency"]);
-      print(d["registrationId"]);
-      print("--------------");
+    var townScriptData = jsonDecode(response.body)["data"];
+    var decodedData = jsonDecode(townScriptData);
+    Attendee attendee;
+    for (var data in decodedData) {
+      attendee = Attendee(
+        name: data["userName"],
+        email: data["userEmailId"],
+        mobile: data["answerList"][1]["answer"],
+        gender: data["answerList"][0]["answer"],
+        attendeeCategory: data["answerList"][2]["answer"],
+        collegeHasIEDC: data["answerList"][3]["answer"],
+        address: data["answerList"][4]["answer"],
+        foodPreference: data["answerList"][5]["answer"],
+        emergencyContact: data["answerList"][6]["answer"],
+        districtOfResidence: data["answerList"][7]["answer"],
+        iedcRegistrationType: data["allTicketName"],
+        iedcRegistrationNumber: data["registrationId"].toString(),
+      );
+      uploadtoFirebase(attendee);
     }
   }
 }
