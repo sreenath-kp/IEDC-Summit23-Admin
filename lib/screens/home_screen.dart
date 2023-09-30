@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:summit_admin_app/components/home_button.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,21 +13,35 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("IEDC-Summit"),
-          centerTitle: true,
-        ),
-        body: Column(
+      appBar: AppBar(
+        title: const Text("IEDC-Summit"),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
           children: [
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/scanner');
-                },
-                child: const Text("Scan"),
-              ),
-            )
+            HomeButton(
+              title: "Event Attendence",
+              func: () {
+                Navigator.pushNamed(context, '/scanner');
+              },
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            HomeButton(
+              title: "WorkShop Attendence",
+              func: () {
+                null;
+              },
+            ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }
