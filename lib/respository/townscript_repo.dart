@@ -21,20 +21,30 @@ class TowscriptRepository {
     var data1 = jsonDecode(data["data"]);
     // print(data1);
     for (var d in data1) {
+      print(d["answerList"][0]["question"]);
       print(d["answerList"][0]["answer"]);
+      print(d["answerList"][1]["question"]);
       print(d["answerList"][1]["answer"]);
+      print(d["answerList"][2]["question"]);
       print(d["answerList"][2]["answer"]);
+      print(d["answerList"][3]["question"]);
       print(d["answerList"][3]["answer"]);
+      print(d["answerList"][4]["question"]);
       print(d["answerList"][4]["answer"]);
+      print(d["answerList"][5]["question"]);
       print(d["answerList"][5]["answer"]);
+      print(d["answerList"][6]["question"]);
       print(d["answerList"][6]["answer"]);
+      print(d["answerList"][7]["question"]);
       print(d["answerList"][7]["answer"]);
       // print(d["answerList"][8]["answer"]);
       // print(d["answerList"][9]["answer"]);
+      print(d["userName"]);
       print(d["userEmailId"]);
       print(d["allTicketName"]);
       print(d["ticketCurrency"]);
       print(d["registrationId"]);
+      print("--------------");
     }
   }
 }
