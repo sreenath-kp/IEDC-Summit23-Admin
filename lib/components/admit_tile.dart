@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:summit_admin_app/providers/firebase_providers.dart';
+import 'package:summit_admin_app/respository/townscript_repo.dart';
 
 class AdmitTile extends StatelessWidget {
   final String barId;
+
   const AdmitTile({super.key, required this.barId});
 
   @override
@@ -36,7 +40,9 @@ class AdmitTile extends StatelessWidget {
             Icons.done,
             color: Colors.greenAccent,
           ),
-          onPressed: () {},
+          onPressed: () {
+            TowscriptRepository().gettingData();
+          },
         ),
       ),
     );
