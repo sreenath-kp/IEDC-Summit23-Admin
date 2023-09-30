@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:summit_admin_app/components/admit_tile.dart';
 
-class QRCodeScanScreen extends StatefulWidget {
-  const QRCodeScanScreen({super.key});
+class ScannerScreen extends StatefulWidget {
+  const ScannerScreen({super.key});
 
   @override
-  State<QRCodeScanScreen> createState() => _QRCodeScanScreenState();
+  State<ScannerScreen> createState() => _ScannerScreenState();
 }
 
-class _QRCodeScanScreenState extends State<QRCodeScanScreen> {
+class _ScannerScreenState extends State<ScannerScreen> {
   String result = " ";
   @override
   Widget build(BuildContext context) {
