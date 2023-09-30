@@ -35,6 +35,7 @@ class _QRCodeScanScreenState extends State<QRCodeScanScreen> {
                     setState(
                       () {
                         result = capture.barcodes[0].rawValue.toString();
+                        print(result);
                       },
                     );
                   },
