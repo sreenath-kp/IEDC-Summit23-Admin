@@ -12,7 +12,7 @@ class HomeButton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 30),
       width: double.infinity,
       height: 70,
-      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
         color: Pallete.greyColor,
         border: Border.all(
@@ -27,6 +27,7 @@ class HomeButton extends StatelessWidget {
         onPressed: func,
         child: Text(
           title,
+          textAlign: TextAlign.center,
           style: const TextStyle(
             color: Colors.amberAccent,
             fontWeight: FontWeight.bold,
