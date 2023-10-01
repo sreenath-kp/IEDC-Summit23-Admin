@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:summit_admin_app/components/home_button.dart';
+import 'package:summit_admin_app/components/workshop_tile.dart';
 import 'package:summit_admin_app/providers/firebase_providers.dart';
 import 'package:summit_admin_app/respository/townscript_repo.dart';
 
@@ -27,6 +28,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
+            WorkshopTile(),
+            const SizedBox(
+              height: 50,
+            ),
             HomeButton(
               title: "Event Attendence",
               func: () {
