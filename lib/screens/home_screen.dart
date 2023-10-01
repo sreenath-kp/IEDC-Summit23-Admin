@@ -37,7 +37,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               height: 50,
             ),
             HomeButton(
-              title: "WorkShop Attendence",
+              title: "Work shop Attendence",
               func: () {
                 null;
               },

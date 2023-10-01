@@ -3,8 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AdmitTile extends ConsumerWidget {
   final String barId;
+  final String name;
 
-  const AdmitTile({super.key, required this.barId});
+  const AdmitTile({super.key, required this.name, required this.barId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,9 +24,9 @@ class AdmitTile extends ConsumerWidget {
             child: Icon(Icons.verified, fill: 1.0),
           ),
         ),
-        title: const Text(
-          "Student name",
-          style: TextStyle(
+        title: Text(
+          name,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
