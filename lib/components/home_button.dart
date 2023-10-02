@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:summit_admin_app/theme/pallete.dart';
 
 class HomeButton extends StatelessWidget {
   final String title;
@@ -8,33 +7,79 @@ class HomeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 30),
-      width: double.infinity,
-      height: 70,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      decoration: BoxDecoration(
-        color: Pallete.greyColor,
-        border: Border.all(
-          color: Colors.green,
-          width: 2,
-        ),
-        boxShadow: const <BoxShadow>[
-          BoxShadow(color: Colors.green, offset: Offset(2, 2))
-        ],
-      ),
-      child: TextButton(
-        onPressed: func,
-        child: Text(
-          title,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            color: Colors.amberAccent,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
+    return Column(
+      children: [
+        Container(
+          width: 319,
+          height: 60,
+          padding: const EdgeInsets.only(
+            top: 10,
+            left: 31,
+            right: 31,
+            bottom: 11,
+          ),
+          clipBehavior: Clip.antiAlias,
+          decoration: ShapeDecoration(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+          child: TextButton(
+            onPressed: func,
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Color(0xFF07070C),
+                fontSize: 25,
+                fontFamily: 'DM Sans',
+                fontWeight: FontWeight.w500,
+                height: 0,
+              ),
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 }
+
+// class Frame2 extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         Container(
+//           width: 319,
+//           height: 60,
+//           padding: const EdgeInsets.only(
+//             top: 10,
+//             left: 31,
+//             right: 31,
+//             bottom: 11,
+//           ),
+//           clipBehavior: Clip.antiAlias,
+//           decoration: ShapeDecoration(
+//             color: Colors.white,
+//             shape: RoundedRectangleBorder(
+//               borderRadius: BorderRadius.circular(20),
+//             ),
+//           ),
+//           child: TextButton(
+//             onPressed: func,
+//             child: Text(
+//               title,
+//               textAlign: TextAlign.center,
+//               style: const TextStyle(
+//                 color: Colors.amberAccent,
+//                 fontWeight: FontWeight.bold,
+//                 fontSize: 18,
+//               ),
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
