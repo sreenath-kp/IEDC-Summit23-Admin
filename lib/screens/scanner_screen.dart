@@ -12,8 +12,7 @@ class ScannerScreen extends StatefulWidget {
 
 class _ScannerScreenState extends State<ScannerScreen> {
   bool _screenOpened = false;
-  String result = " ";
-  String name = "";
+
   void _screenClosed() {
     _screenOpened = !_screenOpened;
   }
@@ -62,6 +61,16 @@ class _ScannerScreenState extends State<ScannerScreen> {
                     }
                   },
                 ),
+              ),
+            ),
+            const Text(
+              'Scanning...',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 30,
+                fontFamily: 'DM Sans',
+                fontWeight: FontWeight.w700,
+                height: 0,
               ),
             ),
             HomeButton(

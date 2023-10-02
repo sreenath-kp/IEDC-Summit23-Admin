@@ -48,6 +48,7 @@ class TownscriptRepository {
         districtOfResidence: data["answerList"][7]["answer"],
         iedcRegistrationType: data["allTicketName"],
         iedcRegistrationNumber: data["registrationId"].toString(),
+        isPresent: false,
       );
       uploadtoFirebase(attendee);
     }

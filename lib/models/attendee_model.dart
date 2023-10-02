@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class Attendee {
@@ -13,7 +14,8 @@ class Attendee {
   final String districtOfResidence;
   final String iedcRegistrationType;
   final String iedcRegistrationNumber;
-  
+  bool isPresent = false;
+
   Attendee({
     required this.name,
     required this.email,
@@ -27,6 +29,7 @@ class Attendee {
     required this.districtOfResidence,
     required this.iedcRegistrationType,
     required this.iedcRegistrationNumber,
+    required this.isPresent,
   });
 
   Attendee copyWith({
@@ -42,6 +45,7 @@ class Attendee {
     String? districtOfResidence,
     String? iedcRegistrationType,
     String? iedcRegistrationNumber,
+    bool? isPresent,
   }) {
     return Attendee(
       name: name ?? this.name,
@@ -55,7 +59,9 @@ class Attendee {
       emergencyContact: emergencyContact ?? this.emergencyContact,
       districtOfResidence: districtOfResidence ?? this.districtOfResidence,
       iedcRegistrationType: iedcRegistrationType ?? this.iedcRegistrationType,
-      iedcRegistrationNumber: iedcRegistrationNumber ?? this.iedcRegistrationNumber,
+      iedcRegistrationNumber:
+          iedcRegistrationNumber ?? this.iedcRegistrationNumber,
+      isPresent: isPresent ?? this.isPresent,
     );
   }
 
@@ -73,6 +79,7 @@ class Attendee {
       'districtOfResidence': districtOfResidence,
       'iedcRegistrationType': iedcRegistrationType,
       'iedcRegistrationNumber': iedcRegistrationNumber,
+      'isPresent': isPresent,
     };
   }
 
@@ -90,19 +97,19 @@ class Attendee {
       districtOfResidence: map['districtOfResidence'] ?? '',
       iedcRegistrationType: map['iedcRegistrationType'] ?? '',
       iedcRegistrationNumber: map['iedcRegistrationNumber'] ?? '',
+      isPresent: map['isPresent'] ?? false,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Attendee.fromJson(String source) => Attendee.fromMap(json.decode(source));
+  factory Attendee.fromJson(String source) =>
+      Attendee.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'Attendee(name: $name, email: $email, mobile: $mobile, gender: $gender, attendeeCategory: $attendeeCategory, collegeHasIEDC: $collegeHasIEDC, address: $address, foodPreference: $foodPreference, emergencyContact: $emergencyContact, districtOfResidence: $districtOfResidence, iedcRegistrationType: $iedcRegistrationType, iedcRegistrationNumber: $iedcRegistrationNumber)';
+    return 'Attendee(name: $name, email: $email, mobile: $mobile, gender: $gender, attendeeCategory: $attendeeCategory, collegeHasIEDC: $collegeHasIEDC, address: $address, foodPreference: $foodPreference, emergencyContact: $emergencyContact, districtOfResidence: $districtOfResidence, iedcRegistrationType: $iedcRegistrationType, iedcRegistrationNumber: $iedcRegistrationNumber, isPresent: $isPresent)';
   }
-
-
 }
 
 
