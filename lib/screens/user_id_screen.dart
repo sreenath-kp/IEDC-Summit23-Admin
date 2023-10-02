@@ -27,7 +27,7 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
             appBar: AppBar(
               title: const Text("Add Attendence"),
               leading: IconButton(
-                icon: Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back),
                 onPressed: () {
                   widget.screenClosed();
                   Navigator.of(context).pop();
@@ -135,7 +135,11 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                       ),
                     ),
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        var nav = Navigator.of(context);
+                        nav.pop();
+                        nav.pop();
+                      },
                       child: const Center(
                         child: Text(
                           'Go to Homepage',
