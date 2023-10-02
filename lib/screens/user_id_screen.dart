@@ -1,15 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:summit_admin_app/components/progress_indicator.dart';
 import 'package:summit_admin_app/components/text_spanner.dart';
 import 'package:summit_admin_app/controller/attendee_controller.dart';
 
 class UserIDScreen extends ConsumerStatefulWidget {
   final String id;
+  final Function() screenClosed;
   const UserIDScreen({
     Key? key,
     required this.id,
+    required this.screenClosed,
   }) : super(key: key);
 
   @override
@@ -23,6 +26,13 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
           data: (attendee) => Scaffold(
             appBar: AppBar(
               title: const Text("Add Attendence"),
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  widget.screenClosed();
+                  Navigator.of(context).pop();
+                },
+              ),
             ),
             body: Padding(
               padding: const EdgeInsets.all(13),
