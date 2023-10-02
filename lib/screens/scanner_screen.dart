@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:summit_admin_app/components/admit_tile.dart';
+import 'package:summit_admin_app/components/home_button.dart';
+import 'package:summit_admin_app/models/attendee_model.dart';
 import 'package:summit_admin_app/providers/firebase_providers.dart';
 import 'package:summit_admin_app/respository/firebase_repo.dart';
 
@@ -18,41 +19,41 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("IEDC-Summit"),
-        centerTitle: true,
-      ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisSize: MainAxisSize.max,
           children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: MobileScanner(
-                  fit: BoxFit.fill,
-                  controller: MobileScannerController(
-                    detectionSpeed: DetectionSpeed.normal,
-                    facing: CameraFacing.back,
-                    torchEnabled: false,
+            Container(
+              width: 292.08,
+              height: 292,
+              decoration: ShapeDecoration(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
+                  side: BorderSide(
+                    width: 5,
+                    strokeAlign: BorderSide.strokeAlignCenter,
+                    color: Colors.white.withOpacity(0.5),
                   ),
-                  onDetect: (capture) async {
-                    final id = capture.barcodes[0].rawValue.toString();
-                    final userData = await FirebaseRepo(
-                            firestore: ref.watch(firestoreProvider))
-                        .getDatabyId(id);
-                    setState(() {
-                      result = id;
-                      name = userData!.name;
-                    });
-                  },
                 ),
               ),
-            ),
-            Expanded(
-              child: Center(
-                child: AdmitTile(barId: result, name: name),
+              child: MobileScanner(
+                fit: BoxFit.fill,
+                controller: MobileScannerController(
+                  detectionSpeed: DetectionSpeed.normal,
+                  facing: CameraFacing.back,
+                  torchEnabled: false,
+                ),
+                onDetect: (capture) async {
+                  final id = capture.barcodes[0].rawValue.toString();
+                  final Attendee? userData = await FirebaseRepo(
+                          firestore: ref.watch(firestoreProvider))
+                      .getDatabyId(id);
+                },
               ),
             ),
+            HomeButton(title: "Enter ID manually", func: () {})
           ],
         ),
       ),
