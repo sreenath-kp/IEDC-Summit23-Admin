@@ -32,11 +32,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const HomeScreenText(text: 'Live count : '),
+                  HomeScreenText(text: 'Live count : '),
                   SizedBox(
                     width: 50,
                   ),
-                  const HomeScreenText(text: '99'),
+                  HomeScreenText(text: '99'),
                 ],
               ),
               SizedBox(
@@ -49,26 +49,26 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const HomeScreenText(text: 'Veg  :'),
-                      const HomeScreenText(text: '99'),
+                      HomeScreenText(text: 'Veg  :'),
+                      HomeScreenText(text: '99'),
                       SizedBox(
                         height: 30,
                       ),
-                      const HomeScreenText(text: 'Kit :'),
-                      const HomeScreenText(text: '99'),
+                      HomeScreenText(text: 'Kit :'),
+                      HomeScreenText(text: '99'),
                     ],
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const HomeScreenText(text: 'Veg  :'),
-                      const HomeScreenText(text: '99'),
+                      HomeScreenText(text: 'Veg  :'),
+                      HomeScreenText(text: '99'),
                       SizedBox(
                         height: 30,
                       ),
-                      const HomeScreenText(text: 'Kit :'),
-                      const HomeScreenText(text: '99'),
+                      HomeScreenText(text: 'Kit :'),
+                      HomeScreenText(text: '99'),
                     ],
                   ),
                 ],
