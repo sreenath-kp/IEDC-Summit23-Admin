@@ -20,37 +20,38 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          mainAxisSize: MainAxisSize.max,
           children: [
-            Container(
-              width: 292.08,
-              height: 292,
-              decoration: ShapeDecoration(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  side: BorderSide(
-                    width: 5,
-                    strokeAlign: BorderSide.strokeAlignCenter,
-                    color: Colors.white.withOpacity(0.5),
+            Center(
+              child: Container(
+                width: 292,
+                height: 292,
+                decoration: ShapeDecoration(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    side: BorderSide(
+                      width: 5,
+                      strokeAlign: BorderSide.strokeAlignCenter,
+                      color: Colors.white.withOpacity(0.5),
+                    ),
                   ),
                 ),
-              ),
-              child: MobileScanner(
-                fit: BoxFit.fill,
-                controller: MobileScannerController(
-                  detectionSpeed: DetectionSpeed.normal,
-                  facing: CameraFacing.back,
-                  torchEnabled: false,
+                child: MobileScanner(
+                  fit: BoxFit.fill,
+                  controller: MobileScannerController(
+                    detectionSpeed: DetectionSpeed.normal,
+                    facing: CameraFacing.back,
+                    torchEnabled: false,
+                  ),
+                  onDetect: (capture) async {
+                    final id = capture.barcodes[0].rawValue.toString();
+                    final Attendee? userData = await FirebaseRepo(
+                            firestore: ref.watch(firestoreProvider))
+                        .getDatabyId(id);
+                  },
                 ),
-                onDetect: (capture) async {
-                  final id = capture.barcodes[0].rawValue.toString();
-                  final Attendee? userData = await FirebaseRepo(
-                          firestore: ref.watch(firestoreProvider))
-                      .getDatabyId(id);
-                },
               ),
             ),
             HomeButton(title: "Enter ID manually", func: () {})

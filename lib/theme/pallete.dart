@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Pallete {
   // Colors
@@ -8,6 +9,7 @@ class Pallete {
 
   // Themes
   static var darkModeAppTheme = ThemeData.dark().copyWith(
+    textTheme: GoogleFonts.dmSansTextTheme(),
     scaffoldBackgroundColor: backgroundColor,
     cardColor: greyColor,
     appBarTheme: const AppBarTheme(
