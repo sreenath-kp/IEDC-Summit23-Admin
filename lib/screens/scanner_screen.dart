@@ -58,7 +58,10 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> {
                 ),
               ),
             ),
-            HomeButton(title: "Enter ID manually", func: () {})
+            HomeButton(
+              title: "Enter ID manually",
+              func: () {},
+            )
           ],
         ),
       ),
