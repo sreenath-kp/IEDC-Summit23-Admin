@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:summit_admin_app/components/home_button.dart';
-import 'package:summit_admin_app/models/attendee_model.dart';
-import 'package:summit_admin_app/providers/firebase_providers.dart';
-import 'package:summit_admin_app/respository/firebase_repo.dart';
+import 'package:summit_admin_app/screens/user_id_screen.dart';
 
 class ScannerScreen extends ConsumerStatefulWidget {
   const ScannerScreen({super.key});
@@ -14,6 +12,10 @@ class ScannerScreen extends ConsumerStatefulWidget {
 }
 
 class _ScannerScreenState extends ConsumerState<ScannerScreen> {
+  // Attendee? getData(String id) async {
+
+  // }
+
   String result = " ";
   String name = "";
   @override
@@ -45,11 +47,13 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> {
                     facing: CameraFacing.back,
                     torchEnabled: false,
                   ),
-                  onDetect: (capture) async {
+                  onDetect: (capture) {
                     final id = capture.barcodes[0].rawValue.toString();
-                    final Attendee? userData = await FirebaseRepo(
-                            firestore: ref.watch(firestoreProvider))
-                        .getDatabyId(id);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => UserIDScreen(id: id),
+                      ),
+                    );
                   },
                 ),
               ),
