@@ -12,13 +12,6 @@ class HomeButton extends StatelessWidget {
         Container(
           width: 319,
           height: 60,
-          padding: const EdgeInsets.only(
-            top: 10,
-            left: 31,
-            right: 31,
-            bottom: 11,
-          ),
-          clipBehavior: Clip.antiAlias,
           decoration: ShapeDecoration(
             color: Colors.white,
             shape: RoundedRectangleBorder(
@@ -32,8 +25,7 @@ class HomeButton extends StatelessWidget {
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Color(0xFF07070C),
-                fontSize: 25,
-                fontFamily: 'DM Sans',
+                fontSize: 28,
                 fontWeight: FontWeight.w500,
                 height: 0,
               ),
