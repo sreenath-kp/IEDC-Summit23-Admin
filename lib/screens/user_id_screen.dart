@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:summit_admin_app/components/progress_indicator.dart';
 import 'package:summit_admin_app/components/text_spanner.dart';
 import 'package:summit_admin_app/controller/attendee_controller.dart';
+import 'package:summit_admin_app/models/attendee_model.dart';
 
 class UserIDScreen extends ConsumerStatefulWidget {
   final String id;
@@ -19,6 +20,17 @@ class UserIDScreen extends ConsumerStatefulWidget {
 }
 
 class _UserIDScreenState extends ConsumerState<UserIDScreen> {
+  bool _isApproved = false;
+
+  void _addAttendence(Attendee attendee) {
+    ref.watch(attendeeControllerProvider.notifier).addAttendence(attendee);
+    setState(
+      () {
+        _isApproved = true;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ref.watch(getAttendeeByIDProvider(widget.id)).when(
@@ -53,14 +65,19 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                     height: 70,
                   ),
                   Container(
-                    width: 125,
+                    width: 300,
                     height: 125,
                     clipBehavior: Clip.antiAlias,
                     decoration: ShapeDecoration(
-                      color: Colors.white,
+                      color: _isApproved
+                          ? Color.fromARGB(255, 164, 248, 119)
+                          : const Color.fromARGB(255, 250, 142, 134),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(770),
+                        borderRadius: BorderRadius.circular(10),
                       ),
+                    ),
+                    child: Center(
+                      child: Text(_isApproved ? "Approved" : "Not Approved"),
                     ),
                   ),
                   const SizedBox(
@@ -92,20 +109,29 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                     height: 60,
                     clipBehavior: Clip.antiAlias,
                     decoration: ShapeDecoration(
+                      color: _isApproved ? Colors.white : Colors.black,
                       shape: RoundedRectangleBorder(
-                        side:
-                            const BorderSide(width: 2.70, color: Colors.white),
+                        side: BorderSide(
+                            width: 2.70,
+                            color: _isApproved ? Colors.black : Colors.white),
                         borderRadius: BorderRadius.circular(18),
                       ),
                     ),
                     child: TextButton(
-                      onPressed: () {},
-                      child: const Center(
+                      onPressed: () {
+                        if (!_isApproved) {
+                          _addAttendence(attendee);
+                        } else {
+                          widget.screenClosed();
+                          Navigator.of(context).pop();
+                        }
+                      },
+                      child: Center(
                         child: Text(
-                          'Approve',
+                          !_isApproved ? "Approved " : 'Go to Scanner',
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 27,
+                            color: _isApproved ? Colors.black : Colors.white,
+                            fontSize: 20,
                             fontFamily: 'DM Sans',
                             fontWeight: FontWeight.w500,
                             height: 0,
