@@ -39,7 +39,7 @@ class AttendeeRepository {
   }
 
   Stream<int> getPresentCount() {
-    return _presentAttendees.snapshots().map(
+    return _attendees.where("isPresent", isEqualTo: true).snapshots().map(
           (event) => event.docs.length,
         );
   }
