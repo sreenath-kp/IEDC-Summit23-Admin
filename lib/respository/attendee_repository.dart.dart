@@ -27,4 +27,19 @@ class AttendeeRepository {
           ),
         );
   }
+
+  Future<bool> addAttendence(Attendee attendee) async {
+    try {
+      await _attendees.doc(attendee.iedcRegistrationNumber).update(
+            attendee
+                .copyWith(
+                  isPresent: true,
+                )
+                .toMap(),
+          );
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }

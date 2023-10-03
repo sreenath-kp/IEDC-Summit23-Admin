@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:summit_admin_app/components/home_button.dart';
 import 'package:summit_admin_app/screens/user_id_screen.dart';
 
-class ScannerScreen extends ConsumerStatefulWidget {
+class ScannerScreen extends StatefulWidget {
   const ScannerScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _ScannerScreenState();
+  State<ScannerScreen> createState() => _ScannerScreenState();
 }
 
-class _ScannerScreenState extends ConsumerState<ScannerScreen> {
-  // Attendee? getData(String id) async {
+class _ScannerScreenState extends State<ScannerScreen> {
+  bool _screenOpened = false;
 
-  // }
+  void _screenClosed() {
+    _screenOpened = !_screenOpened;
+  }
 
-  String result = " ";
-  String name = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,17 +47,36 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> {
                     torchEnabled: false,
                   ),
                   onDetect: (capture) {
-                    final id = capture.barcodes[0].rawValue.toString();
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => UserIDScreen(id: id),
-                      ),
-                    );
+                    if (!_screenOpened) {
+                      final id = capture.barcodes[0].rawValue.toString();
+                      _screenOpened = true;
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => UserIDScreen(
+                            id: id,
+                            screenClosed: _screenClosed,
+                          ),
+                        ),
+                      );
+                    }
                   },
                 ),
               ),
             ),
-            HomeButton(title: "Enter ID manually", func: () {})
+            const Text(
+              'Scanning...',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 30,
+                fontFamily: 'DM Sans',
+                fontWeight: FontWeight.w700,
+                height: 0,
+              ),
+            ),
+            HomeButton(
+              title: "Enter ID manually",
+              func: () {},
+            )
           ],
         ),
       ),

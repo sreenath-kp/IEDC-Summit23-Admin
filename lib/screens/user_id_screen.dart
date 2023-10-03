@@ -1,14 +1,18 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:summit_admin_app/components/progress_indicator.dart';
+import 'package:summit_admin_app/components/text_spanner.dart';
 import 'package:summit_admin_app/controller/attendee_controller.dart';
+import 'package:summit_admin_app/models/attendee_model.dart';
 
 class UserIDScreen extends ConsumerStatefulWidget {
   final String id;
+  final Function() screenClosed;
   const UserIDScreen({
     Key? key,
     required this.id,
+    required this.screenClosed,
   }) : super(key: key);
 
   @override
@@ -16,214 +20,162 @@ class UserIDScreen extends ConsumerStatefulWidget {
 }
 
 class _UserIDScreenState extends ConsumerState<UserIDScreen> {
+  bool _isApproved = false;
+
+  void _addAttendence(Attendee attendee) {
+    ref.watch(attendeeControllerProvider.notifier).addAttendence(attendee);
+    setState(
+      () {
+        _isApproved = true;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ref.watch(getAttendeeByIDProvider(widget.id)).when(
           data: (attendee) => Scaffold(
             appBar: AppBar(
               title: const Text("Add Attendence"),
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  widget.screenClosed();
+                  Navigator.of(context).pop();
+                },
+              ),
             ),
-            body: Container(
-              width: 393,
-              height: 852,
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(color: Color(0xFF1F202B)),
-              child: Stack(
+            body: Padding(
+              padding: const EdgeInsets.all(13),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Positioned(
-                    left: 43,
-                    top: 129,
-                    child: Text(
-                      'Scanning Successful!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontFamily: 'DM Sans',
-                        fontWeight: FontWeight.w700,
-                        height: 0,
-                      ),
+                  const Text(
+                    'Scanning Successful!',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontFamily: 'DM Sans',
+                      fontWeight: FontWeight.w700,
+                      height: 0,
                     ),
                   ),
-                  Positioned(
-                    left: 43,
-                    top: 441,
-                    child: Text.rich(
-                      TextSpan(
-                        children: [
-                          const TextSpan(
-                            text: 'Name :',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontFamily: 'DM Sans',
-                              fontWeight: FontWeight.w400,
-                              height: 0,
-                            ),
-                          ),
-                          TextSpan(
-                            text: attendee.name,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontFamily: 'DM Sans',
-                              fontWeight: FontWeight.w700,
-                              height: 0,
-                            ),
-                          ),
-                        ],
+                  const SizedBox(
+                    height: 70,
+                  ),
+                  Container(
+                    width: 300,
+                    height: 125,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: ShapeDecoration(
+                      color: _isApproved
+                          ? Color.fromARGB(255, 164, 248, 119)
+                          : const Color.fromARGB(255, 250, 142, 134),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                  ),
-                  Positioned(
-                    left: 43,
-                    top: 480,
-                    child: Text.rich(
-                      TextSpan(
-                        children: [
-                          const TextSpan(
-                            text: 'Ticket ID :',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontFamily: 'DM Sans',
-                              fontWeight: FontWeight.w400,
-                              height: 0,
-                            ),
-                          ),
-                          TextSpan(
-                            text: attendee.iedcRegistrationNumber,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontFamily: 'DM Sans',
-                              fontWeight: FontWeight.w700,
-                              height: 0,
-                            ),
-                          ),
-                        ],
-                      ),
+                    child: Center(
+                      child: Text(_isApproved ? "Approved" : "Not Approved"),
                     ),
                   ),
-                  Positioned(
-                    left: 43,
-                    top: 519,
-                    child: Text.rich(
-                      TextSpan(
-                        children: [
-                          const TextSpan(
-                            text: 'College :',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontFamily: 'DM Sans',
-                              fontWeight: FontWeight.w400,
-                              height: 0,
-                            ),
-                          ),
-                          TextSpan(
-                            text: attendee.address,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontFamily: 'DM Sans',
-                              fontWeight: FontWeight.w700,
-                              height: 0,
-                            ),
-                          ),
-                        ],
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextSpanner(
+                        title: "Name : ",
+                        subtitile: attendee.name,
+                      ),
+                      TextSpanner(
+                        title: "Ticket ID : ",
+                        subtitile: attendee.iedcRegistrationNumber,
+                      ),
+                      TextSpanner(
+                        title: "Email : ",
+                        subtitile: attendee.email,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Container(
+                    width: 287.10,
+                    height: 60,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: ShapeDecoration(
+                      color: _isApproved ? Colors.white : Colors.black,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                            width: 2.70,
+                            color: _isApproved ? Colors.black : Colors.white),
+                        borderRadius: BorderRadius.circular(18),
                       ),
                     ),
-                  ),
-                  Positioned(
-                    left: 53,
-                    top: 651,
-                    child: Container(
-                      width: 287.10,
-                      height: 60,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: ShapeDecoration(
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                              width: 2.70, color: Colors.white),
-                          borderRadius: BorderRadius.circular(18),
+                    child: TextButton(
+                      onPressed: () {
+                        if (!_isApproved) {
+                          _addAttendence(attendee);
+                        } else {
+                          widget.screenClosed();
+                          Navigator.of(context).pop();
+                        }
+                      },
+                      child: Center(
+                        child: Text(
+                          !_isApproved ? "Approved " : 'Go to Scanner',
+                          style: TextStyle(
+                            color: _isApproved ? Colors.black : Colors.white,
+                            fontSize: 20,
+                            fontFamily: 'DM Sans',
+                            fontWeight: FontWeight.w500,
+                            height: 0,
+                          ),
                         ),
                       ),
-                      child: const Stack(
-                        children: [
-                          Positioned(
-                            left: 85,
-                            top: 12,
-                            child: Text(
-                              'Approve',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 27,
-                                fontFamily: 'DM Sans',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
                     ),
                   ),
-                  Positioned(
-                    left: 134,
-                    top: 242,
-                    child: Container(
-                      width: 125,
-                      height: 125,
-                      padding: const EdgeInsets.only(
-                          top: 115, left: 19, right: 18.50),
-                      clipBehavior: Clip.antiAlias,
-                      decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(770),
-                        ),
-                      ),
-                      child: const Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [],
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Container(
+                    width: 287,
+                    height: 60,
+                    padding: const EdgeInsets.only(
+                      top: 12,
+                      left: 36,
+                      right: 35,
+                      bottom: 8,
+                    ),
+                    clipBehavior: Clip.antiAlias,
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                  ),
-                  Positioned(
-                    left: 53,
-                    top: 736,
-                    child: Container(
-                      padding: const EdgeInsets.only(
-                        top: 12,
-                        left: 36,
-                        right: 35,
-                        bottom: 13,
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                      child: const Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Go to Homepage',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 27,
-                              fontFamily: 'DM Sans',
-                              fontWeight: FontWeight.w500,
-                              height: 0,
-                            ),
+                    child: TextButton(
+                      onPressed: () {
+                        var nav = Navigator.of(context);
+                        nav.pop();
+                        nav.pop();
+                      },
+                      child: const Center(
+                        child: Text(
+                          'Go to Homepage',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontFamily: 'DM Sans',
+                            fontWeight: FontWeight.w500,
+                            height: 0,
                           ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
@@ -232,9 +184,10 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
             ),
           ),
           error: (error, stackTrace) => SnackBar(
-              content: Text(
-            error.toString(),
-          )),
+            content: Text(
+              error.toString(),
+            ),
+          ),
           loading: () => const Loader(),
         );
   }
