@@ -18,10 +18,15 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   String result = " ";
-  String count = "0";
+  late String count;
 
   @override
   Widget build(BuildContext context) {
+    count = ref.watch(presentCountProvider).when(
+          data: (count) => count.toString(),
+          loading: () => "..",
+          error: (e, s) => "?",
+        );
     return Scaffold(
       appBar: AppBar(
         title: Text(

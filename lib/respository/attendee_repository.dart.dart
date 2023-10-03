@@ -13,6 +13,12 @@ final attendeeRepositoryProvider = Provider<AttendeeRepository>(
   },
 );
 
+final presentCountProvider = StreamProvider<int>(
+  (ref) {
+    return ref.watch(attendeeRepositoryProvider).getPresentCount();
+  },
+);
+
 class AttendeeRepository {
   final FirebaseFirestore _firestore;
 
@@ -21,6 +27,8 @@ class AttendeeRepository {
   }) : _firestore = firestore;
 
   CollectionReference get _attendees => _firestore.collection('attendees');
+  CollectionReference get _presentAttendees =>
+      _firestore.collection('presentAttendees');
 
   Stream<Attendee> getDatabyId(String id) {
     return _attendees.doc(id).snapshots().map(
@@ -30,15 +38,20 @@ class AttendeeRepository {
         );
   }
 
+  Stream<int> getPresentCount() {
+    return _presentAttendees.snapshots().map(
+          (event) => event.docs.length,
+        );
+  }
+
   Future<bool> addAttendence(Attendee attendee) async {
     try {
       await _attendees.doc(attendee.iedcRegistrationNumber).update(
-            attendee
-                .copyWith(
-                  isPresent: true,
-                )
-                .toMap(),
+            attendee.copyWith(isPresent: true).toMap(),
           );
+      await _presentAttendees
+          .doc(attendee.iedcRegistrationNumber)
+          .set(attendee.toMap());
       return true;
     } catch (e) {
       return false;

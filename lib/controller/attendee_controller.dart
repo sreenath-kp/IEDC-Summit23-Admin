@@ -9,6 +9,12 @@ final getAttendeeByIDProvider = StreamProvider.family(
   },
 );
 
+final presentCountProvider = StreamProvider<int>(
+  (ref) {
+    return ref.watch(attendeeRepositoryProvider).getPresentCount();
+  },
+);
+
 final attendeeControllerProvider =
     StateNotifierProvider<AttendeeController, bool>(
   (ref) {
