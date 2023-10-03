@@ -21,11 +21,13 @@ class UserIDScreen extends ConsumerStatefulWidget {
 
 class _UserIDScreenState extends ConsumerState<UserIDScreen> {
   bool _isApproved = false;
+  bool _marked = false;
 
   void _addAttendence(Attendee attendee) {
     ref.watch(attendeeControllerProvider.notifier).addAttendence(attendee);
     setState(
       () {
+        _marked = true;
         _isApproved = true;
       },
     );
@@ -65,21 +67,36 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                     height: 70,
                   ),
                   Container(
-                    width: 300,
-                    height: 125,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: ShapeDecoration(
-                      color: _isApproved
-                          ? Color.fromARGB(255, 164, 248, 119)
-                          : const Color.fromARGB(255, 250, 142, 134),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                      width: 125,
+                      height: 125,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: ShapeDecoration(
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(100),
+                        ),
                       ),
-                    ),
-                    child: Center(
-                      child: Text(_isApproved ? "Approved" : "Not Approved"),
-                    ),
-                  ),
+                      child: Center(
+                        child: _isApproved
+                            ? Container(
+                                width: 120,
+                                height: 120,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: ShapeDecoration(
+                                  color: const Color.fromARGB(255, 10, 10, 10),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
+                                ),
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.done_rounded,
+                                    size: 100,
+                                  ),
+                                ),
+                              )
+                            : const Text("Not Approved"),
+                      )),
                   const SizedBox(
                     height: 50,
                   ),
@@ -128,7 +145,11 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                       },
                       child: Center(
                         child: Text(
-                          !_isApproved ? "Approved " : 'Go to Scanner',
+                          _marked
+                              ? "Go to Scanner"
+                              : !_isApproved
+                                  ? "Approve "
+                                  : 'Go to Scanner',
                           style: TextStyle(
                             color: _isApproved ? Colors.black : Colors.white,
                             fontSize: 20,
@@ -141,7 +162,7 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 50,
+                    height: 30,
                   ),
                   Container(
                     width: 287,

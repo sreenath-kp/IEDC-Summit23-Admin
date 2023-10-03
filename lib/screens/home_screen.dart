@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:summit_admin_app/components/home_button.dart';
 import 'package:summit_admin_app/components/home_screen_texts.dart';
+import 'package:summit_admin_app/controller/attendee_controller.dart';
 // import 'package:summit_admin_app/providers/firebase_providers.dart';
 // import 'package:summit_admin_app/respository/townscript_repo.dart';
 // import 'package:summit_admin_app/providers/firebase_providers.dart';
@@ -17,6 +18,8 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   String result = " ";
+  String count = "0";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,14 +39,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50.0),
         child: Column(
           children: [
-            const Row(
+            Row(
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(left: 30.0),
                   child: HomeScreenText(text: 'Live count :'),
                 ),
-                SizedBox(width: 20),
-                HomeScreenText(text: '99'),
+                const SizedBox(width: 20),
+                HomeScreenText(
+                  text: count,
+                )
               ],
             ),
             const SizedBox(height: 40),
@@ -91,7 +96,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             HomeButton(
               title: "Workshops",
               func: () {
-                null;
+                print(count);
+                ;
               },
             ),
             const SizedBox(
