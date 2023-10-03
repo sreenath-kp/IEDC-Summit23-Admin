@@ -18,9 +18,9 @@ class TownscriptRepository {
           .set(
             attendee.toMap(),
           );
-      print("success");
+      // print("success");
     } catch (e) {
-      print("failed to upload");
+      // print("failed to upload");
     }
   }
 
