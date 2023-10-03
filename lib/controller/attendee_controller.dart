@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:summit_admin_app/components/utils.dart';
 import 'package:summit_admin_app/models/attendee_model.dart';
 import 'package:summit_admin_app/respository/attendee_repository.dart.dart';
 
