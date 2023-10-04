@@ -47,18 +47,18 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                 },
               ),
             ),
-            body: Padding(
-              padding: const EdgeInsets.all(13),
+            body: Center(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text(
-                    'Scanning Successful!',
-                    style: TextStyle(
+                  Text(
+                    attendee.isPresent
+                        ? "Attendee Already Marked"
+                        : 'Scanning Successful!',
+                    style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 30,
-                      fontFamily: 'DM Sans',
+                      fontSize: 26,
                       fontWeight: FontWeight.w700,
                       height: 0,
                     ),
@@ -87,23 +87,13 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                   const SizedBox(
                     height: 50,
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextSpanner(
-                        title: "Name : ",
-                        subtitile: attendee.name,
-                      ),
-                      TextSpanner(
-                        title: "Ticket ID : ",
-                        subtitile: attendee.iedcRegistrationNumber,
-                      ),
-                      TextSpanner(
-                        title: "Email : ",
-                        subtitile: attendee.email,
-                      ),
-                    ],
+                  TextSpanner(
+                    title: "Name : ",
+                    subtitile: attendee.name,
+                  ),
+                  TextSpanner(
+                    title: "Ticket ID : ",
+                    subtitile: attendee.iedcRegistrationNumber,
                   ),
                   const SizedBox(
                     height: 50,
@@ -151,7 +141,6 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                           style: TextStyle(
                             color: _isApproved ? Colors.black : Colors.white,
                             fontSize: 20,
-                            fontFamily: 'DM Sans',
                             fontWeight: FontWeight.w500,
                             height: 0,
                           ),
@@ -190,7 +179,6 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,
-                            fontFamily: 'DM Sans',
                             fontWeight: FontWeight.w500,
                             height: 0,
                           ),

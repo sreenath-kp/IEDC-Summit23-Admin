@@ -59,7 +59,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
                 child: MobileScanner(
                   fit: BoxFit.fill,
                   controller: MobileScannerController(
-                    detectionSpeed: DetectionSpeed.normal,
+                    detectionSpeed: DetectionSpeed.noDuplicates,
                     facing: CameraFacing.back,
                     torchEnabled: false,
                   ),
@@ -85,7 +85,6 @@ class _ScannerScreenState extends State<ScannerScreen> {
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 30,
-                fontFamily: 'DM Sans',
                 fontWeight: FontWeight.w700,
                 height: 0,
               ),
