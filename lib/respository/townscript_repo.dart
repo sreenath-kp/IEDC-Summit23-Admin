@@ -16,7 +16,7 @@ class TownscriptRepository {
           .collection('attendees')
           .doc(attendee.iedcRegistrationNumber)
           .set(
-            attendee.toMap(),
+            attendee.toMap()
           );
       print("success");
     } catch (e) {
