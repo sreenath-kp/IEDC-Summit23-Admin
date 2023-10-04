@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:summit_admin_app/components/home_button.dart';
+import 'package:summit_admin_app/components/manual_sub.dart';
 import 'package:summit_admin_app/screens/user_id_screen.dart';
 
 class ScannerScreen extends StatefulWidget {
@@ -12,9 +13,27 @@ class ScannerScreen extends StatefulWidget {
 
 class _ScannerScreenState extends State<ScannerScreen> {
   bool _screenOpened = false;
+  final TextEditingController _controller = TextEditingController();
 
   void _screenClosed() {
     _screenOpened = !_screenOpened;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  void routeToUserIDScreen(String id) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => UserIDScreen(
+          id: id,
+          screenClosed: _screenClosed,
+        ),
+      ),
+    );
   }
 
   @override
@@ -38,22 +57,29 @@ class _ScannerScreenState extends State<ScannerScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            HomeButton(
-              title: "Enter ID manually",
-              func: () {},
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(child: ManualSub(controller: _controller)),
+                IconButton(
+                    onPressed: () {
+                      String id = _controller.text;
+                      routeToUserIDScreen(id);
+                    },
+                    icon: const Icon(Icons.send))
+              ],
             ),
             Center(
               child: Container(
                 width: 292,
                 height: 292,
-                decoration: ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    side: BorderSide(
-                      width: 5,
-                      strokeAlign: BorderSide.strokeAlignCenter,
-                      color: Colors.white.withOpacity(0.5),
-                    ),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  border: Border(
+                    top: BorderSide(width: 5, color: Colors.red),
+                    left: BorderSide(width: 5, color: Colors.green),
+                    right: BorderSide(width: 5, color: Colors.blue),
+                    bottom: BorderSide(width: 5, color: Colors.yellow),
                   ),
                 ),
                 child: MobileScanner(
@@ -67,14 +93,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
                     if (!_screenOpened) {
                       final id = capture.barcodes[0].rawValue.toString();
                       _screenOpened = true;
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => UserIDScreen(
-                            id: id,
-                            screenClosed: _screenClosed,
-                          ),
-                        ),
-                      );
+                      routeToUserIDScreen(id);
                     }
                   },
                 ),
