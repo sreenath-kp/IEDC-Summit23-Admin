@@ -27,8 +27,8 @@ class AttendeeRepository {
   }) : _firestore = firestore;
 
   CollectionReference get _attendees => _firestore.collection('attendees');
-  CollectionReference get _presentAttendees =>
-      _firestore.collection('presentAttendees');
+  // CollectionReference get _presentAttendees =>
+  //     _firestore.collection('presentAttendees');
 
   Stream<Attendee> getDatabyId(String id) {
     return _attendees.doc(id).snapshots().map(
@@ -39,7 +39,7 @@ class AttendeeRepository {
   }
 
   Stream<int> getPresentCount() {
-    return _presentAttendees.snapshots().map(
+    return _attendees.where("isPresent", isEqualTo: true).snapshots().map(
           (event) => event.docs.length,
         );
   }
@@ -49,9 +49,9 @@ class AttendeeRepository {
       await _attendees.doc(attendee.iedcRegistrationNumber).update(
             attendee.copyWith(isPresent: true).toMap(),
           );
-      await _presentAttendees
-          .doc(attendee.iedcRegistrationNumber)
-          .set(attendee.toMap());
+      // await _presentAttendees
+      //     .doc(attendee.iedcRegistrationNumber)
+      //     .set(attendee.toMap());
       return true;
     } catch (e) {
       return false;
