@@ -40,51 +40,53 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
-        child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.all(40),
-              child: Column(
-                children: [
-                  HomeScreenText(text: 'Live Count: $count'),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  const HomeScreenText(text: 'Veg: 0'),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  const HomeScreenText(text: 'Non-Veg: 0'),
-                ],
+        child: Center(
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.all(40),
+                child: Column(
+                  children: [
+                    HomeScreenText(text: 'Live Count: $count'),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    const HomeScreenText(text: 'Veg: 0'),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    const HomeScreenText(text: 'Non-Veg: 0'),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 60,
-            ),
-            HomeButton(
-              title: "Event Registration",
-              func: () {
-                Navigator.pushNamed(context, '/scanner');
-              },
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            HomeButton(
-              title: "Workshops",
-              func: () {},
-            ),
-            // const SizedBox(
-            //   height: 30,
-            // ),
-            // HomeButton(
-            //   title: "Upload firebase",
-            //   func: () {
-            //     TownscriptRepository(firestore: ref.watch(firestoreProvider))
-            //         .gettingData();
-            //   },
-            // ),
-          ],
+              const SizedBox(
+                height: 60,
+              ),
+              HomeButton(
+                title: "Event Registration",
+                func: () {
+                  Navigator.pushNamed(context, '/scanner');
+                },
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              HomeButton(
+                title: "Workshops",
+                func: () {},
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              HomeButton(
+                title: "Upload firebase",
+                func: () {
+                  TownscriptRepository(firestore: ref.watch(firestoreProvider))
+                      .gettingData();
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
