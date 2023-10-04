@@ -44,14 +44,4 @@ class AttendeeRepository {
       return false;
     }
   }
-
-  Stream<bool> isAlreadyApproved(String id) async* {
-    try {
-      final doc = await _attendees.doc(id).get();
-      final bool doesDocExist = doc.exists;
-      yield doesDocExist;
-    } catch (e) {
-      yield false; // In case of an error, consider the document as not existing
-    }
-  }
 }

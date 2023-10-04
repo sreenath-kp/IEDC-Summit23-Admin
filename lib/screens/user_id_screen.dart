@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:summit_admin_app/components/progress_indicator.dart';
 import 'package:summit_admin_app/components/text_spanner.dart';
+import 'package:summit_admin_app/components/the_tick.dart';
 import 'package:summit_admin_app/controller/attendee_controller.dart';
 import 'package:summit_admin_app/models/attendee_model.dart';
 
@@ -67,36 +67,23 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                     height: 70,
                   ),
                   Container(
-                      width: 125,
-                      height: 125,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: ShapeDecoration(
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100),
-                        ),
+                    width: 125,
+                    height: 125,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: ShapeDecoration(
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
                       ),
-                      child: Center(
-                        child: _isApproved
-                            ? Container(
-                                width: 120,
-                                height: 120,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: ShapeDecoration(
-                                  color: const Color.fromARGB(255, 10, 10, 10),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                ),
-                                child: const Center(
-                                  child: Icon(
-                                    Icons.done_rounded,
-                                    size: 100,
-                                  ),
-                                ),
-                              )
-                            : const Text("Not Approved"),
-                      )),
+                    ),
+                    child: Center(
+                      child: attendee.isPresent
+                          ? const TheTick()
+                          : _isApproved
+                              ? const TheTick()
+                              : const Text("Not Approved"),
+                    ),
+                  ),
                   const SizedBox(
                     height: 50,
                   ),
@@ -129,13 +116,22 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                       color: _isApproved ? Colors.white : Colors.black,
                       shape: RoundedRectangleBorder(
                         side: BorderSide(
-                            width: 2.70,
-                            color: _isApproved ? Colors.black : Colors.white),
+                          width: 2.70,
+                          color: attendee.isPresent
+                              ? Colors.grey
+                              : _isApproved
+                                  ? Colors.black
+                                  : Colors.white,
+                        ),
                         borderRadius: BorderRadius.circular(18),
                       ),
                     ),
                     child: TextButton(
                       onPressed: () {
+                        if (attendee.isPresent) {
+                          widget.screenClosed();
+                          Navigator.of(context).pop();
+                        }
                         if (!_isApproved) {
                           _addAttendence(attendee);
                         } else {
@@ -145,11 +141,13 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                       },
                       child: Center(
                         child: Text(
-                          _marked
+                          attendee.isPresent
                               ? "Go to Scanner"
-                              : !_isApproved
-                                  ? "Approve "
-                                  : 'Go to Scanner',
+                              : _marked
+                                  ? "Go to Scanner"
+                                  : !_isApproved
+                                      ? "Approve "
+                                      : 'Go to Scanner',
                           style: TextStyle(
                             color: _isApproved ? Colors.black : Colors.white,
                             fontSize: 20,

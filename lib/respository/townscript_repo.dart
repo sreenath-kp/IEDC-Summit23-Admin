@@ -18,9 +18,9 @@ class TownscriptRepository {
           .set(
             attendee.toMap(),
           );
-      // print("success");
+      print("success");
     } catch (e) {
-      // print("failed to upload");
+      print("failed to upload");
     }
   }
 
@@ -54,3 +54,35 @@ class TownscriptRepository {
     }
   }
 }
+
+// Gender
+// Male
+
+// Mobile Number (Whatsapp no preferred)
+// +911425367894
+
+// Attendee category
+// Student
+
+// My college has IEDC
+// No
+
+// Address
+// Trivandrum
+
+// Food preference
+// Veg
+
+// Emergency contact
+// +911234567890
+
+// District of residence
+// Kannur
+
+// Rahul Das P
+// tve21cs109@cet.ac.in
+
+// IEDC Registration
+// INR
+
+// 11854457

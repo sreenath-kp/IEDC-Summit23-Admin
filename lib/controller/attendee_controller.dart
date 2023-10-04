@@ -9,18 +9,6 @@ final getAttendeeByIDProvider = StreamProvider.family(
   },
 );
 
-// final isAlreadyApprovedProvider = FutureProvider.family(
-//   (ref, String id) async {
-//     return ref.watch(attendeeControllerProvider.notifier).isAlreadyApproved(id);
-//   },
-// );
-
-final isAlreadyApprovedProvider = StreamProvider.family(
-  (ref, String id) {
-    return ref.watch(attendeeControllerProvider.notifier).isAlreadyApproved(id);
-  },
-);
-
 final attendeeControllerProvider =
     StateNotifierProvider<AttendeeController, bool>(
   (ref) {
@@ -64,9 +52,5 @@ class AttendeeController extends StateNotifier<bool> {
       );
       return false;
     }
-  }
-
-  Stream<bool> isAlreadyApproved(String id) {
-    return _attendeeRepository.isAlreadyApproved(id);
   }
 }
