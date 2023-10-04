@@ -25,6 +25,10 @@ class _ScannerScreenState extends State<ScannerScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            HomeButton(
+              title: "Enter ID manually",
+              func: () {},
+            ),
             Center(
               child: Container(
                 width: 292,
@@ -73,10 +77,6 @@ class _ScannerScreenState extends State<ScannerScreen> {
                 height: 0,
               ),
             ),
-            HomeButton(
-              title: "Enter ID manually",
-              func: () {},
-            )
           ],
         ),
       ),
