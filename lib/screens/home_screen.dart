@@ -97,16 +97,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               title: "Workshops",
               func: () {},
             ),
-            // const SizedBox(
-            //   height: 50,
-            // ),
-            HomeButton(
-              title: "Upload firebase",
-              func: () {
-                TownscriptRepository(firestore: ref.watch(firestoreProvider))
-                    .gettingData();
-              },
+            const SizedBox(
+              height: 50,
             ),
+            // HomeButton(
+            //   title: "Upload firebase",
+            //   func: () {
+            //     TownscriptRepository(firestore: ref.watch(firestoreProvider))
+            //         .gettingData();
+            //   },
+            // ),
           ],
         ),
       ),
