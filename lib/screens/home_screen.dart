@@ -98,7 +98,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
             HomeButton(
               title: "Workshops",
-              func: () {},
+              func: () {
+                Navigator.pushNamed(context, '/workshops');
+              },
             ),
             const SizedBox(
               height: 50,

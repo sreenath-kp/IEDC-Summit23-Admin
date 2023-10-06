@@ -5,7 +5,7 @@ import 'package:summit_admin_app/screens/scanner_screen.dart';
 import 'firebase_options.dart';
 import 'package:summit_admin_app/screens/home_screen.dart';
 import 'package:summit_admin_app/theme/pallete.dart';
-
+import 'package:summit_admin_app/screens/workshops_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const HomeScreen(),
         '/scanner': (context) => const ScannerScreen(),
+        '/workshops': (context) => const WorkshopsScreen(),
       },
     );
   }
