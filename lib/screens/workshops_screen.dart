@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:summit_admin_app/theme/pallete.dart';
 
 class WorkshopsScreen extends StatelessWidget {
   const WorkshopsScreen({Key? key}) : super(key: key);
