@@ -17,10 +17,22 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   String result = " ";
   late String count;
+  late String vegCount;
+  late String nonVegCount;
 
   @override
   Widget build(BuildContext context) {
     count = ref.watch(presentCountProvider).when(
+          data: (count) => count.toString(),
+          loading: () => "..",
+          error: (e, s) => "?",
+        );
+    vegCount = ref.watch(vegCountProvider).when(
+          data: (count) => count.toString(),
+          loading: () => "..",
+          error: (e, s) => "?",
+        );
+    nonVegCount = ref.watch(nonVegCountProvider).when(
           data: (count) => count.toString(),
           loading: () => "..",
           error: (e, s) => "?",
@@ -52,11 +64,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     const SizedBox(
                       height: 40,
                     ),
-                    const HomeScreenText(text: 'Veg: 0'),
+                    HomeScreenText(text: 'Veg: $vegCount'),
                     const SizedBox(
                       height: 40,
                     ),
-                    const HomeScreenText(text: 'Non-Veg: 0'),
+                    HomeScreenText(text: 'Non-Veg: $nonVegCount'),
                   ],
                 ),
               ),
