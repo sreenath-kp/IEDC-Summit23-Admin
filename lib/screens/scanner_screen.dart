@@ -39,6 +39,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -48,6 +49,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
             color: Colors.white,
           ),
           onPressed: () {
+            FocusScope.of(context).unfocus();
             Navigator.of(context).pop();
           },
         ),
@@ -55,35 +57,23 @@ class _ScannerScreenState extends State<ScannerScreen> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Expanded(child: ManualSub(controller: _controller)),
-                IconButton(
-                    onPressed: () {
-                      String id = _controller.text;
-                      routeToUserIDScreen(id);
-                    },
-                    icon: const Icon(Icons.send))
-              ],
-            ),
             Center(
               child: Container(
                 width: 292,
                 height: 292,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  border: Border(
-                    top: BorderSide(width: 5, color: Colors.red),
-                    left: BorderSide(width: 5, color: Colors.green),
-                    right: BorderSide(width: 5, color: Colors.blue),
-                    bottom: BorderSide(width: 5, color: Colors.yellow),
+                decoration: ShapeDecoration(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    side: BorderSide(
+                      width: 5,
+                      strokeAlign: BorderSide.strokeAlignCenter,
+                      color: Colors.white.withOpacity(0.5),
+                    ),
                   ),
                 ),
                 child: MobileScanner(
-                  fit: BoxFit.fill,
                   controller: MobileScannerController(
                     detectionSpeed: DetectionSpeed.normal,
                     facing: CameraFacing.back,
@@ -99,15 +89,33 @@ class _ScannerScreenState extends State<ScannerScreen> {
                 ),
               ),
             ),
+            const SizedBox(height: 20),
             const Text(
               'Scanning...',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 30,
-                fontFamily: 'DM Sans',
                 fontWeight: FontWeight.w700,
                 height: 0,
               ),
+            ),
+            const SizedBox(height: 70),
+            HomeButton(
+              title: "Enter ID manually",
+              func: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => Dialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ManualSub(
+                      controller: _controller,
+                      func: routeToUserIDScreen,
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ),
