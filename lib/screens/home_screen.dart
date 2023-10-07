@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:summit_admin_app/components/home_button.dart';
 import 'package:summit_admin_app/components/home_screen_texts.dart';
 import 'package:summit_admin_app/controller/attendee_controller.dart';
-import 'package:summit_admin_app/providers/firebase_providers.dart';
-import 'package:summit_admin_app/respository/townscript_repo.dart';
+// import 'package:summit_admin_app/providers/firebase_providers.dart';
+// import 'package:summit_admin_app/respository/townscript_repo.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -39,12 +39,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 30.0),
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                margin: const EdgeInsets.all(40),
+                margin: const EdgeInsets.only(bottom: 100),
                 child: Column(
                   children: [
                     HomeScreenText(text: 'Live Count: $count'),
@@ -58,9 +59,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     const HomeScreenText(text: 'Non-Veg: 0'),
                   ],
                 ),
-              ),
-              const SizedBox(
-                height: 60,
               ),
               HomeButton(
                 title: "Event Registration",
@@ -76,15 +74,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 func: () {},
               ),
               const SizedBox(
-                height: 30,
+                height: 40,
               ),
-              HomeButton(
-                title: "Upload firebase",
-                func: () {
-                  TownscriptRepository(firestore: ref.watch(firestoreProvider))
-                      .gettingData();
-                },
-              ),
+              // HomeButton(
+              //   title: "Upload firebase",
+              //   func: () {
+              //     TownscriptRepository(firestore: ref.watch(firestoreProvider))
+              //         .gettingData();
+              //   },
+              // ),
             ],
           ),
         ),

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:summit_admin_app/screens/user_id_screen.dart';
-import 'package:summit_admin_app/theme/pallete.dart';
 
 class ManualSub extends StatelessWidget {
   final TextEditingController controller;
