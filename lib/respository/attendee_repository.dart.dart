@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:summit_admin_app/constants/null_attendee.dart';
 import 'package:summit_admin_app/models/attendee_model.dart';
 import 'package:summit_admin_app/providers/firebase_providers.dart';
 
@@ -31,11 +32,15 @@ class AttendeeRepository {
   //     _firestore.collection('presentAttendees');
 
   Stream<Attendee> getDatabyId(String id) {
-    return _attendees.doc(id).snapshots().map(
-          (event) => Attendee.fromMap(
-            event.data() as Map<String, dynamic>,
-          ),
-        );
+    try {
+      return _attendees.doc(id).snapshots().map(
+            (event) => Attendee.fromMap(
+              event.data() as Map<String, dynamic>,
+            ),
+          );
+    } catch (e) {
+      return Stream.value(nullAttendee);
+    }
   }
 
   Stream<int> getPresentCount() {
