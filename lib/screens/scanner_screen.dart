@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:summit_admin_app/components/home_button.dart';
+import 'package:summit_admin_app/components/manual_sub.dart';
 import 'package:summit_admin_app/screens/user_id_screen.dart';
 
 class ScannerScreen extends StatefulWidget {
@@ -12,18 +13,51 @@ class ScannerScreen extends StatefulWidget {
 
 class _ScannerScreenState extends State<ScannerScreen> {
   bool _screenOpened = false;
+  final TextEditingController _controller = TextEditingController();
 
   void _screenClosed() {
     _screenOpened = !_screenOpened;
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  void routeToUserIDScreen(String id) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => UserIDScreen(
+          id: id,
+          screenClosed: _screenClosed,
+        ),
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.close,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            FocusScope.of(context).unfocus();
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(
               child: Container(
@@ -40,7 +74,6 @@ class _ScannerScreenState extends State<ScannerScreen> {
                   ),
                 ),
                 child: MobileScanner(
-                  fit: BoxFit.fill,
                   controller: MobileScannerController(
                     detectionSpeed: DetectionSpeed.normal,
                     facing: CameraFacing.back,
@@ -50,33 +83,40 @@ class _ScannerScreenState extends State<ScannerScreen> {
                     if (!_screenOpened) {
                       final id = capture.barcodes[0].rawValue.toString();
                       _screenOpened = true;
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => UserIDScreen(
-                            id: id,
-                            screenClosed: _screenClosed,
-                          ),
-                        ),
-                      );
+                      routeToUserIDScreen(id);
                     }
                   },
                 ),
               ),
             ),
+            const SizedBox(height: 20),
             const Text(
               'Scanning...',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 30,
-                fontFamily: 'DM Sans',
                 fontWeight: FontWeight.w700,
                 height: 0,
               ),
             ),
+            const SizedBox(height: 70),
             HomeButton(
               title: "Enter ID manually",
-              func: () {},
-            )
+              func: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => Dialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ManualSub(
+                      controller: _controller,
+                      func: routeToUserIDScreen,
+                    ),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),

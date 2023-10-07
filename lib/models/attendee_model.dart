@@ -14,7 +14,7 @@ class Attendee {
   final String districtOfResidence;
   final String iedcRegistrationType;
   final String iedcRegistrationNumber;
-  bool isPresent = false;
+  final bool isPresent;
 
   Attendee({
     required this.name,

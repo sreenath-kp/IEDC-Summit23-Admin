@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:summit_admin_app/components/progress_indicator.dart';
 import 'package:summit_admin_app/components/text_spanner.dart';
+import 'package:summit_admin_app/components/the_tick.dart';
 import 'package:summit_admin_app/controller/attendee_controller.dart';
 import 'package:summit_admin_app/models/attendee_model.dart';
 
@@ -47,18 +47,18 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                 },
               ),
             ),
-            body: Padding(
-              padding: const EdgeInsets.all(13),
+            body: Center(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text(
-                    'Scanning Successful!',
-                    style: TextStyle(
+                  Text(
+                    attendee.isPresent
+                        ? "Attendee Already Marked"
+                        : 'Scanning Successful!',
+                    style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 30,
-                      fontFamily: 'DM Sans',
+                      fontSize: 26,
                       fontWeight: FontWeight.w700,
                       height: 0,
                     ),
@@ -67,56 +67,33 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                     height: 70,
                   ),
                   Container(
-                      width: 125,
-                      height: 125,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: ShapeDecoration(
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100),
-                        ),
+                    width: 125,
+                    height: 125,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: ShapeDecoration(
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
                       ),
-                      child: Center(
-                        child: _isApproved
-                            ? Container(
-                                width: 120,
-                                height: 120,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: ShapeDecoration(
-                                  color: const Color.fromARGB(255, 10, 10, 10),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                ),
-                                child: const Center(
-                                  child: Icon(
-                                    Icons.done_rounded,
-                                    size: 100,
-                                  ),
-                                ),
-                              )
-                            : const Text("Not Approved"),
-                      )),
+                    ),
+                    child: Center(
+                      child: attendee.isPresent
+                          ? const TheTick()
+                          : _isApproved
+                              ? const TheTick()
+                              : const Text("Not Approved"),
+                    ),
+                  ),
                   const SizedBox(
                     height: 50,
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextSpanner(
-                        title: "Name : ",
-                        subtitile: attendee.name,
-                      ),
-                      TextSpanner(
-                        title: "Ticket ID : ",
-                        subtitile: attendee.iedcRegistrationNumber,
-                      ),
-                      TextSpanner(
-                        title: "Email : ",
-                        subtitile: attendee.email,
-                      ),
-                    ],
+                  TextSpanner(
+                    title: "Name : ",
+                    subtitile: attendee.name,
+                  ),
+                  TextSpanner(
+                    title: "Ticket ID : ",
+                    subtitile: attendee.iedcRegistrationNumber,
                   ),
                   const SizedBox(
                     height: 50,
@@ -129,13 +106,22 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                       color: _isApproved ? Colors.white : Colors.black,
                       shape: RoundedRectangleBorder(
                         side: BorderSide(
-                            width: 2.70,
-                            color: _isApproved ? Colors.black : Colors.white),
+                          width: 2.70,
+                          color: attendee.isPresent
+                              ? Colors.grey
+                              : _isApproved
+                                  ? Colors.black
+                                  : Colors.white,
+                        ),
                         borderRadius: BorderRadius.circular(18),
                       ),
                     ),
                     child: TextButton(
                       onPressed: () {
+                        if (attendee.isPresent) {
+                          widget.screenClosed();
+                          Navigator.of(context).pop();
+                        }
                         if (!_isApproved) {
                           _addAttendence(attendee);
                         } else {
@@ -145,15 +131,16 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                       },
                       child: Center(
                         child: Text(
-                          _marked
+                          attendee.isPresent
                               ? "Go to Scanner"
-                              : !_isApproved
-                                  ? "Approve "
-                                  : 'Go to Scanner',
+                              : _marked
+                                  ? "Go to Scanner"
+                                  : !_isApproved
+                                      ? "Approve "
+                                      : 'Go to Scanner',
                           style: TextStyle(
                             color: _isApproved ? Colors.black : Colors.white,
                             fontSize: 20,
-                            fontFamily: 'DM Sans',
                             fontWeight: FontWeight.w500,
                             height: 0,
                           ),
@@ -192,7 +179,6 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,
-                            fontFamily: 'DM Sans',
                             fontWeight: FontWeight.w500,
                             height: 0,
                           ),
