@@ -15,6 +15,18 @@ final presentCountProvider = StreamProvider<int>(
   },
 );
 
+final vegCountProvider = StreamProvider<int>(
+  (ref) {
+    return ref.watch(attendeeRepositoryProvider).getVegCount();
+  },
+);
+
+final nonVegCountProvider = StreamProvider<int>(
+  (ref) {
+    return ref.watch(attendeeRepositoryProvider).getNonVegCount();
+  },
+);
+
 final attendeeControllerProvider =
     StateNotifierProvider<AttendeeController, bool>(
   (ref) {
