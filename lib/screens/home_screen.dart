@@ -17,10 +17,22 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   String result = " ";
   late String count;
+  late String vegCount;
+  late String nonVegCount;
 
   @override
   Widget build(BuildContext context) {
     count = ref.watch(presentCountProvider).when(
+          data: (count) => count.toString(),
+          loading: () => "..",
+          error: (e, s) => "?",
+        );
+    vegCount = ref.watch(vegCountProvider).when(
+          data: (count) => count.toString(),
+          loading: () => "..",
+          error: (e, s) => "?",
+        );
+    nonVegCount = ref.watch(nonVegCountProvider).when(
           data: (count) => count.toString(),
           loading: () => "..",
           error: (e, s) => "?",
@@ -39,80 +51,54 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50.0),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 30.0),
-                  child: HomeScreenText(text: 'Live count :'),
-                ),
-                const SizedBox(width: 20),
-                HomeScreenText(
-                  text: count,
-                )
-              ],
-            ),
-            const SizedBox(height: 40),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.center,
+        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(bottom: 100),
+                child: Column(
                   children: [
-                    HomeScreenText(text: 'Veg :'),
-                    SizedBox(height: 6),
-                    HomeScreenText(text: '97'),
-                    SizedBox(height: 30),
-                    HomeScreenText(text: 'Kit :'),
-                    SizedBox(height: 6),
-                    HomeScreenText(text: '98'),
+                    HomeScreenText(text: 'Live Count: $count'),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    HomeScreenText(text: 'Veg: $vegCount'),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    HomeScreenText(text: 'Non-Veg: $nonVegCount'),
                   ],
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    HomeScreenText(text: 'Non Veg :'),
-                    SizedBox(height: 6),
-                    HomeScreenText(text: '99'),
-                    SizedBox(height: 30),
-                    HomeScreenText(text: 'No Kit :'),
-                    SizedBox(height: 6),
-                    HomeScreenText(text: '6000'),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 80),
-            HomeButton(
-              title: "Event Registration",
-              func: () {
-                Navigator.pushNamed(context, '/scanner');
-              },
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            HomeButton(
-              title: "Workshops",
-              func: () {
-                Navigator.pushNamed(context, '/workshops');
-              },
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            // HomeButton(
-            //   title: "Upload firebase",
-            //   func: () {
-            //     TownscriptRepository(firestore: ref.watch(firestoreProvider))
-            //         .gettingData();
-            //   },
-            // ),
-          ],
+              ),
+              HomeButton(
+                title: "Event Registration",
+                func: () {
+                  Navigator.pushNamed(context, '/scanner');
+                },
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              HomeButton(
+                title: "Workshops",
+                func: () {
+                  Navigator.pushNamed(context, '/workshops');
+                },
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              // HomeButton(
+              //   title: "Upload firebase",
+              //   func: () {
+              //     TownscriptRepository(firestore: ref.watch(firestoreProvider))
+              //         .gettingData();
+              //   },
+              // ),
+            ],
+          ),
         ),
       ),
     );

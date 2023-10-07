@@ -38,8 +38,31 @@ class AttendeeRepository {
         );
   }
 
+// get Present Count
   Stream<int> getPresentCount() {
     return _attendees.where("isPresent", isEqualTo: true).snapshots().map(
+          (event) => event.docs.length,
+        );
+  }
+
+// get Veg Count
+  Stream<int> getVegCount() {
+    return _attendees
+        .where("isPresent", isEqualTo: true)
+        .where("foodPreference", isEqualTo: "Veg")
+        .snapshots()
+        .map(
+          (event) => event.docs.length,
+        );
+  }
+
+// get Non Veg Count
+  Stream<int> getNonVegCount() {
+    return _attendees
+        .where("isPresent", isEqualTo: true)
+        .where("foodPreference", isEqualTo: "Non-veg")
+        .snapshots()
+        .map(
           (event) => event.docs.length,
         );
   }

@@ -10,7 +10,6 @@ class TextSpanner extends StatelessWidget {
     const textStyle = TextStyle(
       color: Colors.white,
       fontSize: 22,
-      fontFamily: 'DM Sans',
       fontWeight: FontWeight.w400,
       height: 0,
     );
@@ -23,7 +22,6 @@ class TextSpanner extends StatelessWidget {
             style: const TextStyle(
               color: Colors.white,
               fontSize: 22,
-              fontFamily: 'DM Sans',
               fontWeight: FontWeight.w700,
               height: 0,
             ),
