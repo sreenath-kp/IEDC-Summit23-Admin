@@ -14,3 +14,4 @@ Attendee nullAttendee = Attendee(
     iedcRegistrationType: "iedcRegistrationType",
     iedcRegistrationNumber: "iedcRegistrationNumber",
     isPresent: false);
+// TODO: remove this file
