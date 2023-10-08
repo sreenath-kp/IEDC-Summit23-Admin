@@ -25,15 +25,14 @@ class TownscriptRepository {
   }
 
   Future<void> getDataFromCSV() async {
-    final _rawData = await rootBundle.loadString("assets/event_data.csv");
-    List<List<dynamic>> _listData =
-        const CsvToListConverter().convert(_rawData);
+    final rawData = await rootBundle.loadString("assets/event_data.csv");
+    List<List<dynamic>> listData = const CsvToListConverter().convert(rawData);
     // final fields = await input
     //     .transform(utf8.decoder)
     //     .transform(const CsvToListConverter())
     //     .toList();
-    print(_listData[0]);
-    print(_listData[1]);
+    // print(listData[0]);
+    // print(listData[1]);
 
     // [
     // 0 Registration Id,
@@ -63,20 +62,20 @@ class TownscriptRepository {
     // 24 Check-In Time,
     // 25 Attendee Badge Print,
     // 26 Badge Print Time,];
-    for (var i = 1; i < _listData.length; i++) {
+    for (var i = 1; i < listData.length; i++) {
       Attendee attendee = Attendee(
-        name: _listData[i][1].toString(),
-        email: _listData[i][2].toString(),
-        mobile: _listData[i][7].toString(),
-        gender: _listData[i][6].toString(),
-        attendeeCategory: _listData[i][10].toString(),
-        collegeHasIEDC: _listData[i][11].toString(),
-        address: _listData[i][14].toString(),
-        foodPreference: _listData[i][17].toString(),
-        emergencyContact: _listData[i][18].toString(),
-        districtOfResidence: _listData[i][19].toString(),
-        iedcRegistrationType: _listData[i][4].toString(),
-        iedcRegistrationNumber: _listData[i][0].toString(),
+        name: listData[i][1].toString(),
+        email: listData[i][2].toString(),
+        mobile: listData[i][7].toString(),
+        gender: listData[i][6].toString(),
+        attendeeCategory: listData[i][10].toString(),
+        collegeHasIEDC: listData[i][11].toString(),
+        address: listData[i][14].toString(),
+        foodPreference: listData[i][17].toString(),
+        emergencyContact: listData[i][18].toString(),
+        districtOfResidence: listData[i][19].toString(),
+        iedcRegistrationType: listData[i][4].toString(),
+        iedcRegistrationNumber: listData[i][0].toString(),
         isPresent: false,
       );
       uploadtoFirebase(attendee);
