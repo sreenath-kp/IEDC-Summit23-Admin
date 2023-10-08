@@ -17,8 +17,8 @@ class TextRich extends StatelessWidget {
       TextSpan(
         text: subText,
         style: GoogleFonts.dmSans(
-          color: Colors.white,
           fontWeight: FontWeight.w600,
+          color: Colors.white,
         ),
         children: [
           TextSpan(
@@ -26,6 +26,7 @@ class TextRich extends StatelessWidget {
             style: GoogleFonts.dmSans(
               fontWeight: FontWeight.w500,
               fontSize: 19,
+              color: Colors.white,
             ),
           )
         ],

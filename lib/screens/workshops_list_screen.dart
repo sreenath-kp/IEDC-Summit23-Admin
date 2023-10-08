@@ -42,7 +42,6 @@ class WorkshopsListScreen extends StatelessWidget {
                 title: Text(
                   workshops[index].title,
                   style: const TextStyle(
-                    color: Pallete.whiteColor,
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                   ),

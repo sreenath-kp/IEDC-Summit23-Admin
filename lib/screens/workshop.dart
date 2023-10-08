@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:summit_admin_app/components/workshop_text_rich.dart';
 import 'package:summit_admin_app/models/workshop_model.dart';
+import 'package:summit_admin_app/theme/pallete.dart';
 
 class WorkshopScreen extends StatelessWidget {
   const WorkshopScreen({super.key, required this.workshop});
@@ -71,22 +72,52 @@ class WorkshopScreen extends StatelessWidget {
                   alignment: MainAxisAlignment.spaceAround,
                   children: [
                     TextButton(
+                      style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                        ),
+                        backgroundColor: MaterialStateProperty.all(
+                          Pallete.greyColor,
+                        ),
+                        foregroundColor: MaterialStateProperty.all(
+                          const Color.fromRGBO(0, 0, 0, 1),
+                        ),
+                      ),
                       onPressed: () {},
                       child: Text(
                         'Attendees List',
                         style: GoogleFonts.dmSans(
                           fontWeight: FontWeight.w500,
                           fontSize: 19,
+                          color: Colors.amber,
                         ),
                       ),
                     ),
                     TextButton(
+                      style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                        ),
+                        backgroundColor: MaterialStateProperty.all(
+                          Pallete.greyColor,
+                        ),
+                        foregroundColor: MaterialStateProperty.all(
+                          const Color.fromRGBO(0, 0, 0, 1),
+                        ),
+                      ),
                       onPressed: () {},
                       child: Text(
                         'Add Participant',
                         style: GoogleFonts.dmSans(
                           fontWeight: FontWeight.w500,
                           fontSize: 19,
+                          color: Colors.amberAccent,
                         ),
                       ),
                     ),

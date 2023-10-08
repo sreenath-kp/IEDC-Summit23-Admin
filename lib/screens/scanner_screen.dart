@@ -46,7 +46,6 @@ class _ScannerScreenState extends State<ScannerScreen> {
         leading: IconButton(
           icon: const Icon(
             Icons.close,
-            color: Colors.white,
           ),
           onPressed: () {
             FocusScope.of(context).unfocus();
