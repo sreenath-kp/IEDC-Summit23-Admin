@@ -1,5 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:summit_admin_app/models/workshop_model.dart';
+import 'package:summit_admin_app/providers/firebase_providers.dart';
+
+final workshopRepositoryProvider = Provider<WorkshopRepository>(
+  (ref) {
+    return WorkshopRepository(
+      firestore: ref.watch(firestoreProvider),
+    );
+  },
+);
 
 class WorkshopRepository {
   final FirebaseFirestore _firestore;

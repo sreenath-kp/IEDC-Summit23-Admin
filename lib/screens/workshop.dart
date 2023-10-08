@@ -37,11 +37,9 @@ class WorkshopScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     child: SizedBox(
                       height: 200,
-                      child: Expanded(
-                        child: Image.network(
-                          "https://cdn.sanity.io/images/85e4z8hj/production/44b38df421a37ea5396674058e7f1fb9c346e9d6-1600x1600.jpg",
-                          fit: BoxFit.fill,
-                        ),
+                      child: Image.network(
+                        "https://cdn.sanity.io/images/85e4z8hj/production/44b38df421a37ea5396674058e7f1fb9c346e9d6-1600x1600.jpg",
+                        fit: BoxFit.fill,
                       ),
                     ),
                   ),
