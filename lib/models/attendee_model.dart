@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class Attendee {
@@ -111,27 +110,3 @@ class Attendee {
     return 'Attendee(name: $name, email: $email, mobile: $mobile, gender: $gender, attendeeCategory: $attendeeCategory, collegeHasIEDC: $collegeHasIEDC, address: $address, foodPreference: $foodPreference, emergencyContact: $emergencyContact, districtOfResidence: $districtOfResidence, iedcRegistrationType: $iedcRegistrationType, iedcRegistrationNumber: $iedcRegistrationNumber, isPresent: $isPresent)';
   }
 }
-
-
-
-// Gender
-// Male
-// Mobile Number (Whatsapp no preferred)
-// +911425367894
-// Attendee category
-// Student
-// My college has IEDC
-// No
-// Address
-// Trivandrum
-// Food preference
-// Veg
-// Emergency contact
-// +911234567890
-// District of residence
-// Kannur
-// Rahul Das P
-// tve21cs109@cet.ac.in
-// IEDC Registration
-// INR
-// 11854457
