@@ -29,6 +29,7 @@ class _WorkshopUserIDScreenState extends ConsumerState<WorkshopUserIDScreen> {
   bool _isApproved = false;
   bool _marked = false;
   Attendee attendee = nullAttendee;
+  late bool isPresent = false;
 
   void _addAttendence(String id, String wsName) {
     ref.read(workshopRepositoryProvider).addWorkshopAttendence(wsName, id);
@@ -42,8 +43,6 @@ class _WorkshopUserIDScreenState extends ConsumerState<WorkshopUserIDScreen> {
 
   @override
   Widget build(BuildContext context) {
-    late bool isPresent;
-
     ref.watch(getAttendeeByIDProvider(widget.id)).when(
           data: (attende) {
             attendee = attende;
@@ -60,16 +59,15 @@ class _WorkshopUserIDScreenState extends ConsumerState<WorkshopUserIDScreen> {
         .when(
           data: (data) {
             print("data : " + data.toString());
-            setState(() {
-              isPresent = data;
-            });
+            setState(
+              () {
+                isPresent = data;
+              },
+            );
           },
           error: (error, stackTrace) => errorScaffold(context),
           loading: () => const Loader(),
         );
-    print(isPresent);
-    print(isPresent);
-    print(isPresent);
 
     return Scaffold(
       appBar: theAppBar(context),
@@ -147,7 +145,8 @@ class _WorkshopUserIDScreenState extends ConsumerState<WorkshopUserIDScreen> {
                     Navigator.of(context).pop();
                   }
                   if (!_isApproved) {
-                    _addAttendence(widget.id, widget.wsName);
+                    _addAttendence(
+                        "${widget.id} ${attendee.name}", widget.wsName);
                   } else {
                     widget.screenClosed();
                     Navigator.of(context).pop();
