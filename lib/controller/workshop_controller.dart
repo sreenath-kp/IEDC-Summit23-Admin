@@ -17,6 +17,14 @@ final workshopsProvider = StreamProvider<List<Workshop>>(
   },
 );
 
+final workshopAttendeesProvider = StreamProvider.family(
+  (ref, String workshopName) {
+    return ref
+        .watch(workshopControllerProvider.notifier)
+        .getWorkshopAttendees(workshopName);
+  },
+);
+
 class WorkshopController extends StateNotifier<bool> {
   final WorkshopRepository _workshopRepository;
   WorkshopController({required WorkshopRepository workshopRepository})
@@ -25,5 +33,9 @@ class WorkshopController extends StateNotifier<bool> {
 
   Stream<List<Workshop>> getWorkshops() {
     return _workshopRepository.getWorkshops();
+  }
+
+  Stream<List<String>> getWorkshopAttendees(String workshopName) {
+    return _workshopRepository.getWorkshopAttendees(workshopName);
   }
 }
