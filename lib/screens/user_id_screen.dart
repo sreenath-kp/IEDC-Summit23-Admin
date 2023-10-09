@@ -1,5 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:summit_admin_app/components/home_button.dart';
 import 'package:summit_admin_app/components/home_screen_texts.dart';
 import 'package:summit_admin_app/components/progress_indicator.dart';
@@ -40,16 +42,7 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
     return ref.watch(getAttendeeByIDProvider(widget.id)).when(
           data: (attendee) {
             return Scaffold(
-              appBar: AppBar(
-                title: const Text("Add Attendence"),
-                leading: IconButton(
-                  icon: const Icon(Icons.arrow_back),
-                  onPressed: () {
-                    widget.screenClosed();
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ),
+              appBar: theAppBar(context),
               body: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -216,6 +209,7 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                   HomeButton(
                     title: "Retry",
                     func: () {
+                      widget.screenClosed();
                       Navigator.of(context).pop();
                     },
                   )
@@ -225,5 +219,18 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
           ),
           loading: () => const Loader(),
         );
+  }
+
+  AppBar theAppBar(BuildContext context) {
+    return AppBar(
+      title: const Text("Add Attendence"),
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: () {
+          widget.screenClosed();
+          Navigator.of(context).pop();
+        },
+      ),
+    );
   }
 }

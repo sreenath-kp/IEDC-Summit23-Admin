@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ManualSub extends StatelessWidget {
+class WSManualSub extends StatelessWidget {
   final TextEditingController controller;
-  final Function(String id) func;
-  const ManualSub({
+  final String wsName;
+  final Function(String id, String wsName) func;
+  const WSManualSub({
     Key? key,
     required this.controller,
+    required this.wsName,
     required this.func,
   }) : super(key: key);
 
@@ -46,7 +48,7 @@ class ManualSub extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
             if (controller.text.isNotEmpty) {
-              func(controller.text);
+              func(controller.text, wsName);
             }
           },
           style: IconButton.styleFrom(

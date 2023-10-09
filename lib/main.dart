@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:summit_admin_app/screens/scanner_screen.dart';
+import 'package:summit_admin_app/screens/workshop_scanner.dart';
 import 'package:summit_admin_app/screens/workshops_list_screen.dart';
 import 'firebase_options.dart';
 import 'package:summit_admin_app/screens/home_screen.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       //TODO: Replace later
       routes: {
         '/': (context) => const HomeScreen(),
-        '/scanner': (context) => const ScannerScreen(),
+        '/eventScanner': (context) => const ScannerScreen(),
         '/workshopsList': (context) => const WorkshopsListScreen(),
       },
     );

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:summit_admin_app/components/workshop_text_rich.dart';
 import 'package:summit_admin_app/models/workshop_model.dart';
+import 'package:summit_admin_app/screens/scanner_screen.dart';
+import 'package:summit_admin_app/screens/workshop_scanner.dart';
 
 class WorkshopScreen extends StatelessWidget {
   const WorkshopScreen({super.key, required this.workshop});
@@ -75,18 +77,27 @@ class WorkshopScreen extends StatelessWidget {
                       child: Text(
                         'Attendees List',
                         style: GoogleFonts.dmSans(
+                          color: Colors.amber,
                           fontWeight: FontWeight.w500,
-                          fontSize: 19,
+                          fontSize: 15,
                         ),
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                WorkshopScannerScreen(wsName: workshop.title),
+                          ),
+                        );
+                      },
                       child: Text(
                         'Add Participant',
                         style: GoogleFonts.dmSans(
+                          color: Colors.amber,
                           fontWeight: FontWeight.w500,
-                          fontSize: 19,
+                          fontSize: 15,
                         ),
                       ),
                     ),
