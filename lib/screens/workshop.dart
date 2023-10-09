@@ -70,36 +70,55 @@ class WorkshopScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                ButtonBar(
-                  buttonPadding: const EdgeInsets.all(2),
-                  overflowDirection: VerticalDirection.down,
-                  alignment: MainAxisAlignment.spaceEvenly,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => WorkshopAttendeeListScreen(
-                              workshopName: workshop.title,
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => WorkshopAttendeeListScreen(
+                                workshopName: workshop.title,
+                              ),
                             ),
+                          );
+                        },
+                        child: Text(
+                          'Attendees List',
+                          style: GoogleFonts.dmSans(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
                           ),
-                        );
-                      },
-                      child: Text(
-                        'Attendees List',
-                        style: GoogleFonts.dmSans(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
                         ),
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Add Participant',
-                        style: GoogleFonts.dmSans(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Add Participant',
+                          style: GoogleFonts.dmSans(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Add Spot Participant',
+                          style: GoogleFonts.dmSans(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     ),
