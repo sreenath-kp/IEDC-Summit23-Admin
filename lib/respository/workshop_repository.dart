@@ -29,4 +29,10 @@ class WorkshopRepository {
               .toList(),
         );
   }
+
+  Stream<List<String>> getWorkshopAttendees(String workshopName) {
+    return _workshops.doc(workshopName).snapshots().map((event) =>
+        Workshop.fromMap(event.data() as Map<String, dynamic>).attendees);
+  }
+  
 }
