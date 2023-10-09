@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:summit_admin_app/components/workshop_text_rich.dart';
 import 'package:summit_admin_app/models/workshop_model.dart';
+import 'package:summit_admin_app/screens/add_attendee_screen.dart';
 import 'package:summit_admin_app/screens/workshop_attendees_screen.dart';
 
 class WorkshopScreen extends StatelessWidget {
@@ -112,7 +113,13 @@ class WorkshopScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => AddAttendeeScreen(),
+                            ),
+                          );
+                        },
                         child: Text(
                           'Add Spot Participant',
                           style: GoogleFonts.dmSans(
