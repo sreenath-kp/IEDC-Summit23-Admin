@@ -57,7 +57,7 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
                   children: [
                     Text(
                       attendee.isPresent
-                          ? "Attendee Already Marked"
+                          ? "Attendance Marked"
                           : 'Scanning Successful!',
                       style: const TextStyle(
                         color: Colors.white,
@@ -195,16 +195,6 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
             );
           },
           error: (error, stackTrace) => Scaffold(
-            appBar: AppBar(
-              title: const Text("Add Attendence"),
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  widget.screenClosed();
-                  Navigator.of(context).pop();
-                },
-              ),
-            ),
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

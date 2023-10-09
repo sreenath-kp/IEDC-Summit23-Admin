@@ -26,6 +26,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
   }
 
   void routeToUserIDScreen(String id) {
+    FocusScope.of(context).unfocus();
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => UserIDScreen(

@@ -44,6 +44,7 @@ class ManualSub extends StatelessWidget {
             if (controller.text.isNotEmpty) {
               func(controller.text);
             }
+            controller.clear();
           },
           style: IconButton.styleFrom(
             padding: const EdgeInsets.all(10),
