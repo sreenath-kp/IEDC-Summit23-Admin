@@ -8,7 +8,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:68980353446:android:da32ab9dff6decfd4c8767",
+        "mobilesdk_app_id": "1:671098905742:android:01fc21912920efd70955df",
         "android_client_info": {
           "package_name": "com.example.summit_admin_app"
         }
@@ -16,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB4ghGQuySgMEoihaHRjNg0PkFFkL8tRf4"
+          "current_key": "AIzaSyA4bJ8fNsjtOPbv9zyIV1FvwddKFdCzHdw"
         }
       ],
       "services": {
