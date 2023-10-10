@@ -69,7 +69,7 @@ class _SpotAdmitScreenState extends ConsumerState<SpotAdmitScreen> {
                 TextFieldInput(
                   cont: _iedcRegistrationNumberController,
                   hintTxt: "Enter TicketID",
-                  textInputType: TextInputType.text,
+                  textInputType: TextInputType.number,
                 ),
                 const SizedBox(
                   height: 15,
@@ -77,7 +77,7 @@ class _SpotAdmitScreenState extends ConsumerState<SpotAdmitScreen> {
                 TextFieldInput(
                   cont: _nameController,
                   hintTxt: "Enter Name",
-                  textInputType: TextInputType.text,
+                  textInputType: TextInputType.name,
                 ),
                 const SizedBox(
                   height: 15,
@@ -85,7 +85,7 @@ class _SpotAdmitScreenState extends ConsumerState<SpotAdmitScreen> {
                 TextFieldInput(
                   cont: _mobileController,
                   hintTxt: "Enter PhoneNo",
-                  textInputType: TextInputType.text,
+                  textInputType: TextInputType.number,
                 ),
                 const SizedBox(
                   height: 15,
@@ -93,7 +93,7 @@ class _SpotAdmitScreenState extends ConsumerState<SpotAdmitScreen> {
                 TextFieldInput(
                   cont: _emailController,
                   hintTxt: "Enter Email",
-                  textInputType: TextInputType.text,
+                  textInputType: TextInputType.emailAddress,
                 ),
                 const SizedBox(
                   height: 15,
@@ -102,10 +102,12 @@ class _SpotAdmitScreenState extends ConsumerState<SpotAdmitScreen> {
                   child: Center(
                     child: ElevatedButton(
                       onPressed: () {
-                        if (_iedcRegistrationNumberController.text.isEmpty ||
-                            _nameController.text.isEmpty ||
-                            _mobileController.text.isEmpty ||
-                            _emailController.text.isEmpty) {
+                        if (_iedcRegistrationNumberController.text
+                                .trim()
+                                .isEmpty ||
+                            _nameController.text.trim().isEmpty ||
+                            _mobileController.text.trim().isEmpty ||
+                            _emailController.text.trim().isEmpty) {
                           showSnackBar(context, "Please fill all the fields");
                           return;
                         }
