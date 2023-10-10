@@ -93,14 +93,6 @@ class _SpotAdmitScreenState extends ConsumerState<SpotAdmitScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                TextFieldInput(
-                  cont: _iedcRegistrationTypeController,
-                  hintTxt: "enter regType",
-                  textInputType: TextInputType.text,
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
                 Expanded(
                   child: Center(
                     child: ElevatedButton(
