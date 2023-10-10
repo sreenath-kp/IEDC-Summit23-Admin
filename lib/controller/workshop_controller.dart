@@ -2,6 +2,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:summit_admin_app/models/workshop_model.dart';
 import 'package:summit_admin_app/respository/workshop_repository.dart';
 
+final getWorkShopsByNameProvider = StreamProvider.family((ref, String query) {
+  return ref
+      .watch(workshopControllerProvider.notifier)
+      .getWorkshopsByName(query);
+});
+
 final workshopControllerProvider =
     StateNotifierProvider<WorkshopController, bool>(
   (ref) {
@@ -33,6 +39,10 @@ class WorkshopController extends StateNotifier<bool> {
 
   Stream<List<Workshop>> getWorkshops() {
     return _workshopRepository.getWorkshops();
+  }
+
+  Stream<List<Workshop>> getWorkshopsByName(String query) {
+    return _workshopRepository.getWorkshopsByName(query);
   }
 
   Stream<List<String>> getWorkshopAttendees(String workshopName) {

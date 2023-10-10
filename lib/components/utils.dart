@@ -11,7 +11,6 @@ void showSnackBar(BuildContext context, String msg) {
             msg,
             style: const TextStyle(
               fontSize: 16,
-              fontWeight: FontWeight.w500,
               color: Colors.amber,
             ),
           ),
