@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB4ghGQuySgMEoihaHRjNg0PkFFkL8tRf4',
-    appId: '1:68980353446:android:da32ab9dff6decfd4c8767',
-    messagingSenderId: '68980353446',
-    projectId: 'iedc-app-6754b',
-    storageBucket: 'iedc-app-6754b.appspot.com',
+    apiKey: 'AIzaSyA4bJ8fNsjtOPbv9zyIV1FvwddKFdCzHdw',
+    appId: '1:671098905742:android:01fc21912920efd70955df',
+    messagingSenderId: '671098905742',
+    projectId: 'iedc-pro-app',
+    storageBucket: 'iedc-pro-app.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAKKfEe6pKwsqM-h15Pw0CfFr0rLvqEKSg',
-    appId: '1:68980353446:ios:5ce806f7d935206d4c8767',
-    messagingSenderId: '68980353446',
-    projectId: 'iedc-app-6754b',
-    storageBucket: 'iedc-app-6754b.appspot.com',
+    apiKey: 'AIzaSyC-mF8SC0Zv8zJTcKwtBUNEJTWCbMXfr4I',
+    appId: '1:671098905742:ios:5e61672d9abcbf060955df',
+    messagingSenderId: '671098905742',
+    projectId: 'iedc-pro-app',
+    storageBucket: 'iedc-pro-app.appspot.com',
     iosBundleId: 'com.example.summitAdminApp',
   );
 }
