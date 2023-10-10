@@ -8,8 +8,7 @@ class Pallete {
   static const whiteColor = Color.fromRGBO(255, 255, 255, 1);
 
   // Themes
-  //  static var darkModeAppTheme = ThemeData().copyWith(  -> Rahuls commit
-  static var darkModeAppTheme = ThemeData.dark().copyWith(
+  static var darkModeAppTheme = ThemeData().copyWith(
     textTheme: GoogleFonts.dmSansTextTheme(),
     scaffoldBackgroundColor: backgroundColor,
     cardColor: greyColor,

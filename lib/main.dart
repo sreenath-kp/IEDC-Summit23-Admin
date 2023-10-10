@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       //TODO: Replace later
       routes: {
         '/': (context) => const HomeScreen(),
-        '/scanner': (context) => const ScannerScreen(),
+        '/eventScanner': (context) => const ScannerScreen(),
         '/workshopsList': (context) => const WorkshopsListScreen(),
       },
     );

@@ -76,7 +76,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               HomeButton(
                 title: "Event Registration",
                 func: () {
-                  Navigator.pushNamed(context, '/scanner');
+                  Navigator.pushNamed(context, '/eventScanner');
                 },
               ),
               const SizedBox(
