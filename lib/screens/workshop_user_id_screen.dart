@@ -4,7 +4,6 @@ import 'package:summit_admin_app/components/progress_indicator.dart';
 
 import 'package:summit_admin_app/components/text_spanner.dart';
 import 'package:summit_admin_app/components/the_tick.dart';
-import 'package:summit_admin_app/constants/null_attendee.dart';
 import 'package:summit_admin_app/controller/attendee_controller.dart';
 import 'package:summit_admin_app/models/attendee_model.dart';
 import 'package:summit_admin_app/respository/workshop_repository.dart';
@@ -28,7 +27,7 @@ class WorkshopUserIDScreen extends ConsumerStatefulWidget {
 class _WorkshopUserIDScreenState extends ConsumerState<WorkshopUserIDScreen> {
   bool _isApproved = false;
   bool _marked = false;
-  Attendee attendee = nullAttendee;
+  late Attendee attendee;
   late bool isPresent = false;
 
   void _addAttendence(String id, String wsName) {
