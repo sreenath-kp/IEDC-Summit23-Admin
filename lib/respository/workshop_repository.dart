@@ -54,7 +54,9 @@ class WorkshopRepository {
           "attendees": FieldValue.arrayUnion([id])
         },
       );
-    } catch (e) {}
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   Future<bool> isIDPresentInWorkshop(String id, String wsName) async {
@@ -62,13 +64,10 @@ class WorkshopRepository {
       final wsDoc = await _workshops.doc(wsName).get();
       final Workshop workshop =
           Workshop.fromMap(wsDoc.data()! as Map<String, dynamic>);
-      print(workshop.attendees);
+      // print(workshop.attendees);
       bool result = workshop.attendees.contains(id);
-      print(result.toString() + "    @@@@@@");
       return result;
     } catch (e) {
-      print("\n\n\n\n\n\n\n");
-      print(e.toString());
       return false;
     }
   }
@@ -77,5 +76,4 @@ class WorkshopRepository {
     return _workshops.doc(workshopName).snapshots().map((event) =>
         Workshop.fromMap(event.data() as Map<String, dynamic>).attendees);
   }
-  
 }
