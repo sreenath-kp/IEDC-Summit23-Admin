@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:summit_admin_app/components/progress_indicator.dart';
 import 'package:summit_admin_app/controller/workshop_controller.dart';
+import 'package:summit_admin_app/screens/search_delegate.dart';
 import 'package:summit_admin_app/screens/workshop.dart';
 import 'package:summit_admin_app/theme/pallete.dart';
 
@@ -21,11 +22,15 @@ class WorkshopsListScreen extends ConsumerWidget {
           ),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20.0),
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.search),
+          IconButton(
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: SearchWorkShopsDelegate(ref: ref),
+              );
+            },
+            icon: const Icon(
+              Icons.search,
             ),
           ),
         ],

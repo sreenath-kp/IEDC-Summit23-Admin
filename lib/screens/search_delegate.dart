@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:summit_admin_app/components/progress_indicator.dart';
 import 'package:summit_admin_app/controller/workshop_controller.dart';
 import 'package:summit_admin_app/screens/workshop_scanner.dart';
+import 'package:summit_admin_app/theme/pallete.dart';
 
 class SearchWorkShopsDelegate extends SearchDelegate {
   final WidgetRef _ref;
@@ -39,15 +40,25 @@ class SearchWorkShopsDelegate extends SearchDelegate {
             itemBuilder: (context, index) {
               final workshop = workshops[index];
               return ListTile(
-                  title: Text(workshop.title),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            WorkshopScannerScreen(wsName: workshop.title),
+                contentPadding: const EdgeInsets.only(left: 40),
+                title: Text(
+                  workshop.title,
+                  style: const TextStyle(
+                    color: Pallete.whiteColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => WorkshopScannerScreen(
+                        wsName: workshop.title,
                       ),
-                    );
-                  });
+                    ),
+                  );
+                },
+              );
             },
             itemCount: workshops.length,
           ),
