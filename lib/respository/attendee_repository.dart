@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:summit_admin_app/constants/null_attendee.dart';
 import 'package:summit_admin_app/models/attendee_model.dart';
 import 'package:summit_admin_app/providers/firebase_providers.dart';
 
@@ -38,7 +37,7 @@ class AttendeeRepository {
             ),
           );
     } catch (e) {
-      return Stream.value(nullAttendee);
+      return const Stream.empty();
     }
   }
 

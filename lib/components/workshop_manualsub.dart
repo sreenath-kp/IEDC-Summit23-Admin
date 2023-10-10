@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ManualSub extends StatelessWidget {
+class WSManualSub extends StatelessWidget {
   final TextEditingController controller;
-  final Function(String id) func;
-    const ManualSub({
+  final String wsName;
+  final Function(String id, String wsName) func;
+  const WSManualSub({
     Key? key,
     required this.controller,
+    required this.wsName,
     required this.func,
   }) : super(key: key);
 
@@ -44,11 +46,12 @@ class ManualSub extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {
+            // Unfocus keyboard before popping dialog and navigating
+            FocusScope.of(context).unfocus();
             Navigator.pop(context);
             if (controller.text.isNotEmpty) {
-              func(controller.text);
+              func(controller.text, wsName);
             }
-            controller.clear();
           },
           style: IconButton.styleFrom(
             padding: const EdgeInsets.all(10),

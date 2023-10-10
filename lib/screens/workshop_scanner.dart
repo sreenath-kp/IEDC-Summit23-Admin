@@ -1,20 +1,21 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:summit_admin_app/components/home_button.dart';
-import 'package:summit_admin_app/components/manual_sub.dart';
-import 'package:summit_admin_app/screens/user_id_screen.dart';
+import 'package:summit_admin_app/components/workshop_manualsub.dart';
+import 'package:summit_admin_app/screens/workshop_user_id_screen.dart';
 
-class ScannerScreen extends StatefulWidget {
-  const ScannerScreen({
+class WorkshopScannerScreen extends StatefulWidget {
+  final String wsName;
+  const WorkshopScannerScreen({
     Key? key,
+    required this.wsName,
   }) : super(key: key);
 
   @override
-  State<ScannerScreen> createState() => _ScannerScreenState();
+  State<WorkshopScannerScreen> createState() => _WorkshopScannerScreenState();
 }
 
-class _ScannerScreenState extends State<ScannerScreen> {
+class _WorkshopScannerScreenState extends State<WorkshopScannerScreen> {
   bool _screenOpened = false;
   final TextEditingController _controller = TextEditingController();
 
@@ -28,13 +29,13 @@ class _ScannerScreenState extends State<ScannerScreen> {
     _controller.dispose();
   }
 
-  void routeToUserIDScreen(String id) {
-    FocusScope.of(context).unfocus();
+  void routeToUserIDScreen(String id, String wsName) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => UserIDScreen(
+        builder: (context) => WorkshopUserIDScreen(
           id: id,
           screenClosed: _screenClosed,
+          wsName: wsName,
         ),
       ),
     );
@@ -42,6 +43,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String id;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -85,9 +87,9 @@ class _ScannerScreenState extends State<ScannerScreen> {
                   ),
                   onDetect: (capture) {
                     if (!_screenOpened) {
-                      final id = capture.barcodes[0].rawValue.toString();
+                      id = capture.barcodes[0].rawValue.toString();
                       _screenOpened = true;
-                      routeToUserIDScreen(id);
+                      routeToUserIDScreen(id, widget.wsName);
                     }
                   },
                 ),
@@ -113,7 +115,8 @@ class _ScannerScreenState extends State<ScannerScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: ManualSub(
+                    child: WSManualSub(
+                      wsName: widget.wsName,
                       controller: _controller,
                       func: routeToUserIDScreen,
                     ),
