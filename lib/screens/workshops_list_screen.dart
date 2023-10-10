@@ -53,6 +53,17 @@ class WorkshopsListScreen extends ConsumerWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
+                        trailing: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 25, 0),
+                          child: Text(
+                            "${workshops[index].attendees.length}",
+                            style: const TextStyle(
+                              color: Colors.blueAccent,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
                         onTap: () {
                           showDialog(
                             context: context,
