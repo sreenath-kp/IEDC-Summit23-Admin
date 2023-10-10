@@ -18,6 +18,7 @@ class TheTick extends StatelessWidget {
       child: const Center(
         child: Icon(
           Icons.done_rounded,
+          color: Colors.white,
           size: 100,
         ),
       ),
