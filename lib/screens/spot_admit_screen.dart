@@ -1,12 +1,18 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:summit_admin_app/components/text_field_input.dart';
-import 'package:summit_admin_app/controller/attendee_controller.dart';
 import 'package:summit_admin_app/models/attendee_model.dart';
 import 'package:summit_admin_app/respository/attendee_repository.dart';
+import 'package:summit_admin_app/respository/workshop_repository.dart';
 
 class SpotAdmitScreen extends ConsumerStatefulWidget {
-  const SpotAdmitScreen({super.key});
+  final String wsName;
+  const SpotAdmitScreen({
+    super.key,
+    required this.wsName,
+  });
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -116,6 +122,12 @@ class _SpotAdmitScreenState extends ConsumerState<SpotAdmitScreen> {
                         ref
                             .watch(attendeeRepositoryProvider)
                             .uploadtoFirebase(attendee);
+                        ref
+                            .watch(workshopRepositoryProvider)
+                            .addWorkshopAttendence(
+                              widget.wsName,
+                              attendee.iedcRegistrationNumber,
+                            );
                         Navigator.of(context).pop();
                       },
                       child: const Text("Submit"),
