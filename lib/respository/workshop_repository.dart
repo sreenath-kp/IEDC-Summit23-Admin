@@ -48,6 +48,32 @@ class WorkshopRepository {
         );
   }
 
+  Stream<List<Workshop>> getWorkshopsByName(String query) {
+    return _workshops
+        .where(
+          "title",
+          isGreaterThanOrEqualTo: query.isEmpty ? 0 : query,
+          isLessThan: query.isEmpty
+              ? null
+              : query.substring(0, query.length - 1) +
+                  String.fromCharCode(
+                    query.codeUnitAt(query.length - 1) + 1,
+                  ),
+        )
+        .snapshots()
+        .map(
+      (event) {
+        List<Workshop> communities = [];
+        for (var community in event.docs) {
+          communities.add(
+            Workshop.fromMap(community.data() as Map<String, dynamic>),
+          );
+        }
+        return communities;
+      },
+    );
+  }
+
   Future<void> addWorkshopAttendence(String wsName, String id) async {
     try {
       await _workshops.doc(wsName).update(

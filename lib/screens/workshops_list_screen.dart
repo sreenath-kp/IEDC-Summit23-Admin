@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:summit_admin_app/components/progress_indicator.dart';
 import 'package:summit_admin_app/controller/workshop_controller.dart';
+import 'package:summit_admin_app/screens/search_delegate.dart';
 import 'package:summit_admin_app/screens/workshop.dart';
 import 'package:summit_admin_app/theme/pallete.dart';
 
@@ -21,11 +22,15 @@ class WorkshopsListScreen extends ConsumerWidget {
           ),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20.0),
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.search),
+          IconButton(
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: SearchWorkShopsDelegate(ref: ref),
+              );
+            },
+            icon: const Icon(
+              Icons.search,
             ),
           ),
         ],
@@ -48,6 +53,17 @@ class WorkshopsListScreen extends ConsumerWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
+                        trailing: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 25, 0),
+                          child: Text(
+                            "${workshops[index].attendees.length}",
+                            style: const TextStyle(
+                              color: Colors.blueAccent,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
                         onTap: () {
                           showDialog(
                             context: context,
@@ -59,8 +75,17 @@ class WorkshopsListScreen extends ConsumerWidget {
                       ),
                     ),
                   ),
-              error: (error, stackTrace) =>
-                  const ScaffoldMessenger(child: Text('Error')),
+              error: (error, stackTrace) => Center(
+                      child: Text(
+                    'Check your internet connection',
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Colors.red[200],
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )),
               loading: () => const Loader())
         ],
       ),
