@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:summit_admin_app/components/progress_indicator.dart';
 import 'package:summit_admin_app/controller/workshop_controller.dart';
 import 'package:summit_admin_app/screens/workshop.dart';
-import 'package:summit_admin_app/screens/workshop_scanner.dart';
 import 'package:summit_admin_app/theme/pallete.dart';
 
 class SearchWorkShopsDelegate extends SearchDelegate {
