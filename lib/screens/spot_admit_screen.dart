@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:summit_admin_app/components/text_field_input.dart';
+import 'package:summit_admin_app/components/utils.dart';
 import 'package:summit_admin_app/models/attendee_model.dart';
 import 'package:summit_admin_app/respository/attendee_repository.dart';
 import 'package:summit_admin_app/respository/workshop_repository.dart';
@@ -128,6 +129,8 @@ class _SpotAdmitScreenState extends ConsumerState<SpotAdmitScreen> {
                               widget.wsName,
                               "${attendee.iedcRegistrationNumber} ${attendee.name}",
                             );
+
+                        showSnackBar(context, "spot admission added");
                         Navigator.of(context).pop();
                       },
                       child: const Text("Submit"),
