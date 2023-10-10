@@ -127,7 +127,8 @@ class WorkshopScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const SpotAdmitScreen(),
+                            builder: (context) =>
+                                SpotAdmitScreen(wsName: workshop.title),
                           ),
                         );
                       },
