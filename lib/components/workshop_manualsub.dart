@@ -46,6 +46,8 @@ class WSManualSub extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {
+            // Unfocus keyboard before popping dialog and navigating
+            FocusScope.of(context).unfocus();
             Navigator.pop(context);
             if (controller.text.isNotEmpty) {
               func(controller.text, wsName);
