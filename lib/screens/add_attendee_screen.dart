@@ -4,10 +4,10 @@ class AddAttendeeScreen extends StatefulWidget {
   const AddAttendeeScreen({Key? key}) : super(key: key);
 
   @override
-  _AddAttendeeScreenState createState() => _AddAttendeeScreenState();
+  AddAttendeeScreenState createState() => AddAttendeeScreenState();
 }
 
-class _AddAttendeeScreenState extends State<AddAttendeeScreen> {
+class AddAttendeeScreenState extends State<AddAttendeeScreen> {
   final _formKey = GlobalKey<FormState>();
   String _name = '';
   String _email = '';
@@ -16,7 +16,7 @@ class _AddAttendeeScreenState extends State<AddAttendeeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Attendee'),
+        title: const Text('Add Attendee'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -26,7 +26,7 @@ class _AddAttendeeScreenState extends State<AddAttendeeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Name',
                 ),
                 validator: (value) {
@@ -40,7 +40,7 @@ class _AddAttendeeScreenState extends State<AddAttendeeScreen> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Email',
                 ),
                 validator: (value) {
@@ -53,7 +53,7 @@ class _AddAttendeeScreenState extends State<AddAttendeeScreen> {
                   _email = value!;
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -62,7 +62,7 @@ class _AddAttendeeScreenState extends State<AddAttendeeScreen> {
                     Navigator.pop(context);
                   }
                 },
-                child: Text('Add Attendee'),
+                child: const Text('Add Attendee'),
               ),
             ],
           ),
