@@ -75,8 +75,17 @@ class WorkshopsListScreen extends ConsumerWidget {
                       ),
                     ),
                   ),
-              error: (error, stackTrace) =>
-                  const ScaffoldMessenger(child: Text('Error')),
+              error: (error, stackTrace) => Center(
+                      child: Text(
+                    'Check your internet connection',
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Colors.red[200],
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )),
               loading: () => const Loader())
         ],
       ),
