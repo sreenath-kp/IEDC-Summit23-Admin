@@ -27,8 +27,11 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
   bool _isApproved = false;
   bool _marked = false;
 
-  void _addAttendence(Attendee attendee) {
-    ref.watch(attendeeControllerProvider.notifier).addAttendence(attendee);
+  void _addAttendence(Attendee attendee) async {
+    // TODO: check 
+    await ref
+        .watch(attendeeControllerProvider.notifier)
+        .addAttendence(attendee);
     setState(
       () {
         _marked = true;
