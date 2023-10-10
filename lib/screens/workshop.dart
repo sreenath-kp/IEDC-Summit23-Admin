@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:summit_admin_app/components/workshop_text_rich.dart';
 import 'package:summit_admin_app/models/workshop_model.dart';
+import 'package:summit_admin_app/screens/spot_admit_screen.dart';
 import 'package:summit_admin_app/screens/workshop_scanner.dart';
 import 'package:summit_admin_app/screens/workshop_attendees_screen.dart';
 
@@ -74,38 +75,64 @@ class WorkshopScreen extends StatelessWidget {
                 ButtonBar(
                   buttonPadding: const EdgeInsets.all(2),
                   overflowDirection: VerticalDirection.down,
-                  alignment: MainAxisAlignment.spaceEvenly,
+                  alignment: MainAxisAlignment.center,
                   children: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => WorkshopAttendeeListScreen(
-                              workshopName: workshop.title,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    WorkshopAttendeeListScreen(
+                                  workshopName: workshop.title,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'Attendees List',
+                            style: GoogleFonts.dmSans(
+                              color: Colors.amber,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18,
                             ),
                           ),
-                        );
-                      },
-                      child: Text(
-                        'Attendees List',
-                        style: GoogleFonts.dmSans(
-                          color: Colors.amber,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
                         ),
-                      ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => WorkshopScannerScreen(
+                                    wsName: workshop.title),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'Add Participant',
+                            style: GoogleFonts.dmSans(
+                              color: Colors.amber,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     TextButton(
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) =>
-                                WorkshopScannerScreen(wsName: workshop.title),
+                            builder: (context) => const SpotAdmitScreen(),
                           ),
                         );
                       },
                       child: Text(
-                        'Add Participant',
+                        'Spot Admission',
                         style: GoogleFonts.dmSans(
                           color: Colors.amber,
                           fontWeight: FontWeight.w500,

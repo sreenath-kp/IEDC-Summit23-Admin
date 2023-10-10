@@ -84,4 +84,16 @@ class AttendeeRepository {
       return false;
     }
   }
+
+  Future<void> uploadtoFirebase(Attendee attendee) async {
+    try {
+      await _firestore
+          .collection('attendees')
+          .doc(attendee.iedcRegistrationNumber)
+          .set(attendee.toMap());
+      print("success");
+    } catch (e) {
+      print("failed to upload");
+    }
+  }
 }
