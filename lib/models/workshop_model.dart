@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class Workshop {
@@ -8,6 +9,7 @@ class Workshop {
   final String startTime;
   final String endTime;
   final String venue;
+  final String max;
   final List<String> attendees;
   final List<String> preregistered;
   Workshop({
@@ -18,6 +20,7 @@ class Workshop {
     required this.startTime,
     required this.endTime,
     required this.venue,
+    required this.max,
     required this.attendees,
     required this.preregistered,
   });
@@ -32,6 +35,7 @@ class Workshop {
     String? venue,
     List<String>? attendees,
     List<String>? preregistered,
+    String? max,
   }) {
     return Workshop(
       title: title ?? this.title,
@@ -43,6 +47,7 @@ class Workshop {
       venue: venue ?? this.venue,
       attendees: attendees ?? this.attendees,
       preregistered: preregistered ?? this.preregistered,
+      max: max ?? this.max,
     );
   }
 
@@ -57,6 +62,7 @@ class Workshop {
       'venue': venue,
       'attendees': attendees,
       'preregistered': preregistered,
+      "max": max,
     };
   }
 
@@ -71,6 +77,7 @@ class Workshop {
       venue: map['venue'] ?? '',
       attendees: List<String>.from(map['attendees']),
       preregistered: List<String>.from(map['preregistered']),
+      max: map["max"] ?? "",
     );
   }
 
@@ -81,7 +88,7 @@ class Workshop {
 
   @override
   String toString() {
-    return 'Workshop(title: $title, description: $description, posterUrl: $posterUrl, speaker: $speaker, startTime: $startTime, endTime: $endTime, venue: $venue, attendees: $attendees, preregistered: $preregistered)';
+    return 'Workshop(title: $title, description: $description, posterUrl: $posterUrl, speaker: $speaker, startTime: $startTime, endTime: $endTime, venue: $venue, attendees: $attendees, preregistered: $preregistered. max: $max)';
   }
 }
 

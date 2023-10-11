@@ -43,6 +43,7 @@ class SanityRepo {
         venue: data["venue"],
         attendees: [],
         preregistered: [],
+        max: "",
       );
       uploadtoFirebase(workshop);
     }
