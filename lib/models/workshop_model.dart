@@ -61,11 +61,10 @@ class Workshop {
   }
 
   factory Workshop.fromMap(Map<String, dynamic> map) {
-    Map<String, dynamic> posterUrl = map["posterurl"] as Map<String, dynamic>;
     return Workshop(
       title: map['title'] ?? '',
       description: map['description'] ?? '',
-      posterUrl: posterUrl,
+      posterUrl: map["posterUrl"] as Map<String, dynamic>,
       speaker: map['speaker'] ?? '',
       startTime: map['startTime'] ?? '',
       endTime: map['endTime'] ?? '',
