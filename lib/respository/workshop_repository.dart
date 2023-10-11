@@ -37,13 +37,14 @@ class WorkshopRepository {
 
   Stream<List<Workshop>> getWorkshops() {
     return _workshops.snapshots().map(
-          (event) => event.docs
-              .map(
-                (e) => Workshop.fromMap(
-                  e.data() as Map<String, dynamic>,
-                ),
-              )
-              .toList(),
+          (event) => event.docs.map(
+            (e) {
+              Workshop workshop = Workshop.fromMap(
+                e.data() as Map<String, dynamic>,
+              );
+              return workshop;
+            },
+          ).toList(),
         );
   }
 

@@ -85,11 +85,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               HomeButton(
                 title: "Workshops",
                 func: () async {
-                  int x = await ref
-                      .watch(workshopRepositoryProvider)
-                      .getWorkshopss();
-                  // Navigator.pushNamed(context, '/workshopsList');
-                  print(x);
+                  Navigator.pushNamed(context, '/workshopsList');
                 },
               ),
               const SizedBox(

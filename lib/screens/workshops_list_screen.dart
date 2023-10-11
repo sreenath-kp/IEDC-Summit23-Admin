@@ -75,8 +75,9 @@ class WorkshopsListScreen extends ConsumerWidget {
                       ),
                     ),
                   ),
-              error: (error, stackTrace) =>
-                  const ScaffoldMessenger(child: Text('Error')),
+              error: (error, stackTrace) {
+                return const ScaffoldMessenger(child: Text("error"));
+              },
               loading: () => const Loader())
         ],
       ),
