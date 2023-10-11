@@ -38,18 +38,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           error: (e, s) => "?",
         );
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "IEDC-Summit",
-          style: GoogleFonts.dmSans(
-            fontSize: 25,
-            fontWeight: FontWeight.w500,
-            height: 0,
-          ),
-        ),
-        centerTitle: true,
-        elevation: 0,
-      ),
+      appBar: homeScreenAppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30.0),
         child: Center(
@@ -103,6 +92,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  AppBar homeScreenAppBar() {
+    return AppBar(
+      title: Text(
+        "IEDC-Summit",
+        style: GoogleFonts.dmSans(
+          fontSize: 25,
+          fontWeight: FontWeight.w500,
+          height: 0,
+        ),
+      ),
+      centerTitle: true,
+      elevation: 0,
     );
   }
 }
