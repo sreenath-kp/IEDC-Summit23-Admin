@@ -56,7 +56,7 @@ class WorkshopsListScreen extends ConsumerWidget {
                         trailing: Padding(
                           padding: const EdgeInsets.fromLTRB(0, 0, 25, 0),
                           child: Text(
-                            "${workshops[index].attendees.length}",
+                            "${workshops[index].max}/${workshops[index].attendees.length}",
                             style: const TextStyle(
                               color: Colors.blueAccent,
                               fontSize: 20,
