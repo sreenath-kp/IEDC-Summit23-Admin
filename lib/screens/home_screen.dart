@@ -4,8 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:summit_admin_app/components/home_button.dart';
 import 'package:summit_admin_app/components/home_screen_texts.dart';
 import 'package:summit_admin_app/controller/attendee_controller.dart';
-// import 'package:summit_admin_app/providers/firebase_providers.dart';
-// import 'package:summit_admin_app/respository/sanity_repo.dart';
+import 'package:summit_admin_app/providers/firebase_providers.dart';
+import 'package:summit_admin_app/respository/sanity_repo.dart';
+import 'package:summit_admin_app/respository/townscript_repo.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -79,15 +80,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               const SizedBox(
                 height: 40,
               ),
-              // HomeButton(
-              //   title: "Upload firebase",
-              //   func: () {
-              //     // TownscriptRepository(firestore: ref.watch(firestoreProvider))
-              //     //     .gettingData();
-              //     SanityRepo(firestore: ref.watch(firestoreProvider))
-              //         .gettingData();
-              //   },
-              // ),
+              HomeButton(
+                title: "Upload firebase",
+                func: () {
+                  TownscriptRepository(firestore: ref.watch(firestoreProvider))
+                      .getDataFromCSV();
+
+                  SanityRepo(firestore: ref.watch(firestoreProvider))
+                      .gettingData();
+                },
+              ),
             ],
           ),
         ),
