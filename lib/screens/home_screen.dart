@@ -6,6 +6,7 @@ import 'package:summit_admin_app/components/home_screen_texts.dart';
 import 'package:summit_admin_app/controller/attendee_controller.dart';
 import 'package:summit_admin_app/providers/firebase_providers.dart';
 import 'package:summit_admin_app/respository/sanity_repo.dart';
+import 'package:summit_admin_app/respository/workshop_repository.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -83,8 +84,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
               HomeButton(
                 title: "Workshops",
-                func: () {
-                  Navigator.pushNamed(context, '/workshopsList');
+                func: () async {
+                  int x = await ref
+                      .watch(workshopRepositoryProvider)
+                      .getWorkshopss();
+                  // Navigator.pushNamed(context, '/workshopsList');
+                  print(x);
                 },
               ),
               const SizedBox(
