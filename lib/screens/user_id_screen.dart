@@ -28,7 +28,6 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
 
   void _addAttendence(Attendee attendee) async {
     // TODO: check
-    // TODO: check
     await ref
         .watch(attendeeControllerProvider.notifier)
         .addAttendence(attendee);
