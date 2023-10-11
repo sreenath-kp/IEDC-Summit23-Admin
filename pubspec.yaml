@@ -41,6 +41,7 @@ dependencies:
   http: ^1.1.0
   google_fonts: ^6.1.0
   csv: ^5.0.2
+  flutter_sanity_image_url: ^0.0.3
 
 dev_dependencies:
   flutter_test:
