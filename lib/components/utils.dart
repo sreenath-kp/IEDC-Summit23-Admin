@@ -5,11 +5,13 @@ void showSnackBar(BuildContext context, String msg) {
     ..hideCurrentSnackBar()
     ..showSnackBar(
       SnackBar(
+        duration: const Duration(seconds: 2),
         content: Center(
           child: Text(
             msg,
             style: const TextStyle(
-              fontSize: 20,
+              fontSize: 16,
+              color: Colors.amber,
             ),
           ),
         ),

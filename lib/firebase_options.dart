@@ -54,6 +54,7 @@ class DefaultFirebaseOptions {
     appId: '1:68980353446:android:da32ab9dff6decfd4c8767',
     messagingSenderId: '68980353446',
     projectId: 'iedc-app-6754b',
+    databaseURL: 'https://iedc-app-6754b-default-rtdb.firebaseio.com',
     storageBucket: 'iedc-app-6754b.appspot.com',
   );
 
@@ -62,6 +63,7 @@ class DefaultFirebaseOptions {
     appId: '1:68980353446:ios:5ce806f7d935206d4c8767',
     messagingSenderId: '68980353446',
     projectId: 'iedc-app-6754b',
+    databaseURL: 'https://iedc-app-6754b-default-rtdb.firebaseio.com',
     storageBucket: 'iedc-app-6754b.appspot.com',
     iosBundleId: 'com.example.summitAdminApp',
   );

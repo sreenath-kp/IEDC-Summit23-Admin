@@ -45,7 +45,7 @@ class WorkshopAttendeeListScreen extends ConsumerWidget {
                           itemBuilder: (context, index) => ListTile(
                             contentPadding: const EdgeInsets.only(left: 40),
                             title: Text(
-                              attendees[index].substring(9),
+                              attendees[index].split(' ')[1],
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -53,7 +53,7 @@ class WorkshopAttendeeListScreen extends ConsumerWidget {
                               ),
                             ),
                             subtitle: Text(
-                              "ID : ${attendees[index].substring(0, 8)}",
+                              "ID : ${attendees[index].split(' ')[0]}",
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
