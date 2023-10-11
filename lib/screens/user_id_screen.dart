@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:summit_admin_app/components/home_button.dart';
+import 'package:summit_admin_app/components/home_screen_texts.dart';
 import 'package:summit_admin_app/components/progress_indicator.dart';
 import 'package:summit_admin_app/components/text_spanner.dart';
 import 'package:summit_admin_app/components/the_tick.dart';
@@ -25,7 +27,6 @@ class _UserIDScreenState extends ConsumerState<UserIDScreen> {
   bool _marked = false;
 
   void _addAttendence(Attendee attendee) async {
-    // TODO: check
     // TODO: check
     await ref
         .watch(attendeeControllerProvider.notifier)
