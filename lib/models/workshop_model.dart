@@ -3,7 +3,7 @@ import 'dart:convert';
 class Workshop {
   final String title;
   final String description;
-  final String posterUrl;
+  final Map<String, dynamic> posterUrl;
   final String speaker;
   final String startTime;
   final String endTime;
@@ -25,7 +25,7 @@ class Workshop {
   Workshop copyWith({
     String? title,
     String? description,
-    String? posterUrl,
+    Map<String, dynamic>? posterUrl,
     String? speaker,
     String? startTime,
     String? endTime,
@@ -85,29 +85,29 @@ class Workshop {
   }
 }
 
-List<Workshop> dummyWorkshops = List.generate(
-  10,
-  (index) => Workshop(
-    title: 'Workshop ${index + 1}',
-    description: 'This is the description for Workshop ${index + 1}',
-    posterUrl: 'https://example.com/poster${index + 1}.jpg',
-    speaker: 'Speaker ${index + 1}',
-    startTime: '2022-01-01 10:00:00',
-    endTime: '2022-01-01 12:00:00',
-    venue: 'Venue ${index + 1}',
-    attendees: [
-      'Attendee 1',
-      'Attendee 2',
-      'Attendee 3',
-      'Attendee 4',
-      'Attendee 5',
-    ],
-    preregistered: [
-      'Preregistered 1',
-      'Preregistered 2',
-      'Preregistered 3',
-      'Preregistered 4',
-      'Preregistered 5',
-    ],
-  ),
-);
+// List<Workshop> dummyWorkshops = List.generate(
+//   10,
+//   (index) => Workshop(
+//     title: 'Workshop ${index + 1}',
+//     description: 'This is the description for Workshop ${index + 1}',
+//     posterUrl: 'https://example.com/poster${index + 1}.jpg',
+//     speaker: 'Speaker ${index + 1}',
+//     startTime: '2022-01-01 10:00:00',
+//     endTime: '2022-01-01 12:00:00',
+//     venue: 'Venue ${index + 1}',
+//     attendees: [
+//       'Attendee 1',
+//       'Attendee 2',
+//       'Attendee 3',
+//       'Attendee 4',
+//       'Attendee 5',
+//     ],
+//     preregistered: [
+//       'Preregistered 1',
+//       'Preregistered 2',
+//       'Preregistered 3',
+//       'Preregistered 4',
+//       'Preregistered 5',
+//     ],
+//   ),
+// );
