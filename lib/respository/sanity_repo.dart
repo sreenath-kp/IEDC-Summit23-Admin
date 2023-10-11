@@ -31,10 +31,8 @@ class SanityRepo {
       headers: sanityHeader,
     );
     var sanityData = jsonDecode(response.body)['result'];
-    print(sanityData);
     Workshop workshop;
     for (var data in sanityData) {
-      print(data);
       workshop = Workshop(
         title: data['event_name'],
         startTime: data['start_time'],
