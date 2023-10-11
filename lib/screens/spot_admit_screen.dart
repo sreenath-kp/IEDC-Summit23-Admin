@@ -104,6 +104,13 @@ class _SpotAdmitScreenState extends ConsumerState<SpotAdmitScreen> {
                   child: Center(
                     child: ElevatedButton(
                       onPressed: () {
+                        if (_iedcRegistrationNumberController.text.isEmpty ||
+                            _nameController.text.isEmpty ||
+                            _mobileController.text.isEmpty ||
+                            _emailController.text.isEmpty) {
+                          showSnackBar(context, "Please fill all the fields");
+                          return;
+                        }
                         Attendee attendee = Attendee(
                           name: _nameController.text,
                           email: _emailController.text,

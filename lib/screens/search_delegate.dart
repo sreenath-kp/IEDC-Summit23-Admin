@@ -30,13 +30,14 @@ class SearchWorkShopsDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return const Text('Results');
+    return const SizedBox();
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
     return _ref.watch(getWorkShopsByNameProvider(query)).when(
           data: (workshops) => ListView.builder(
+            itemCount: workshops.length,
             itemBuilder: (context, index) {
               final workshop = workshops[index];
               return ListTile(
@@ -60,7 +61,6 @@ class SearchWorkShopsDelegate extends SearchDelegate {
                 },
               );
             },
-            itemCount: workshops.length,
           ),
           error: (error, stackTrace) {
             return const Text("error");
