@@ -19,19 +19,6 @@ class WorkshopAttendeeListScreen extends ConsumerWidget {
             height: 0,
           ),
         ),
-        actions: [
-          // TODO: Implement export to CSV - optional
-          TextButton(
-            onPressed: () {},
-            child: const Text(
-              'Export to CSV',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-              ),
-            ),
-          )
-        ],
         elevation: 0,
       ),
       body: Column(
@@ -45,7 +32,7 @@ class WorkshopAttendeeListScreen extends ConsumerWidget {
                           itemBuilder: (context, index) => ListTile(
                             contentPadding: const EdgeInsets.only(left: 40),
                             title: Text(
-                              attendees[index].split(' ')[1],
+                              attendees[index].split('*')[1],
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -53,7 +40,7 @@ class WorkshopAttendeeListScreen extends ConsumerWidget {
                               ),
                             ),
                             subtitle: Text(
-                              "ID : ${attendees[index].split(' ')[0]}",
+                              "ID : ${attendees[index].split('*')[0]}",
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
