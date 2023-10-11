@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:summit_admin_app/components/home_button.dart';
-import 'package:summit_admin_app/components/home_screen_texts.dart';
 import 'package:summit_admin_app/components/progress_indicator.dart';
-
 import 'package:summit_admin_app/components/text_spanner.dart';
 import 'package:summit_admin_app/components/the_tick.dart';
 import 'package:summit_admin_app/controller/attendee_controller.dart';
@@ -200,13 +197,37 @@ class _WorkshopUserIDScreenState extends ConsumerState<WorkshopUserIDScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const HomeScreenText(text: "Invalid ID"),
-                  const SizedBox(
-                    height: 50,
+                  Text(
+                    "Invalid ID",
+                    style: TextStyle(
+                      color: Colors.red[200],
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      height: 0,
+                    ),
                   ),
-                  HomeButton(
-                    title: "Retry",
-                    func: () {
+                  const SizedBox(height: 20),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                    ),
+                    child: const Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+                      child: Text(
+                        "Retry",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          height: 0,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
                       widget.screenClosed();
                       Navigator.of(context).pop();
                     },
@@ -217,23 +238,6 @@ class _WorkshopUserIDScreenState extends ConsumerState<WorkshopUserIDScreen> {
           ),
           loading: () => const Loader(),
         );
-    // ref
-    //     .read(
-    //       isIDPresentInWorkshopProvider(
-    //         Ws(wsName: widget.wsName, id: widget.id),
-    //       ),
-    //     )
-    //     .when(
-    //       data: (data) {
-    //         setState(
-    //           () {
-    //             isPresent = data;
-    //           },
-    //         );
-    //       },
-    //       error: (error, stackTrace) => errorScaffold(context),
-    //       loading: () => const Loader(),
-    //     );
   }
 
   AppBar theAppBar(BuildContext context) {

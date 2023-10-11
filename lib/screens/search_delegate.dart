@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:summit_admin_app/components/progress_indicator.dart';
 import 'package:summit_admin_app/controller/workshop_controller.dart';
-import 'package:summit_admin_app/screens/workshop_scanner.dart';
+import 'package:summit_admin_app/models/workshop_model.dart';
+import 'package:summit_admin_app/screens/workshop.dart';
 import 'package:summit_admin_app/theme/pallete.dart';
 
 class SearchWorkShopsDelegate extends SearchDelegate {
@@ -10,6 +11,17 @@ class SearchWorkShopsDelegate extends SearchDelegate {
   SearchWorkShopsDelegate({
     required WidgetRef ref,
   }) : _ref = ref;
+
+  List<Workshop>? searchWorkshops(String query) {
+    if (query.isNotEmpty) {
+      return _ref.watch(getWorkShopsByNameProvider(query)).when(
+            data: (workshops) => workshops,
+            error: (error, stackTrace) => null,
+            loading: () => [],
+          );
+    }
+    return [];
+  }
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -30,7 +42,38 @@ class SearchWorkShopsDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return const SizedBox();
+    final workshops = searchWorkshops(query);
+    if (workshops == null) {
+      return const Center(
+        child: Text("No results found"),
+      );
+    }
+    return ListView.builder(
+      itemCount: workshops.length,
+      itemBuilder: (context, index) {
+        final workshop = workshops[index];
+        return ListTile(
+          contentPadding: const EdgeInsets.only(left: 40),
+          title: Text(
+            workshop.title,
+            style: const TextStyle(
+              color: Pallete.whiteColor,
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => WorkshopScreen(
+                  workshop: workshop,
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -53,8 +96,8 @@ class SearchWorkShopsDelegate extends SearchDelegate {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => WorkshopScannerScreen(
-                        wsName: workshop.title,
+                      builder: (context) => WorkshopScreen(
+                        workshop: workshop,
                       ),
                     ),
                   );
