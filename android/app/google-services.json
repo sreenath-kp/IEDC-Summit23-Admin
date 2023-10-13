@@ -1,8 +1,9 @@
 {
   "project_info": {
-    "project_number": "671098905742",
-    "project_id": "iedc-pro-app",
-    "storage_bucket": "iedc-pro-app.appspot.com"
+    "project_number": "68980353446",
+    "firebase_url": "https://iedc-app-6754b-default-rtdb.firebaseio.com",
+    "project_id": "iedc-app-6754b",
+    "storage_bucket": "iedc-app-6754b.appspot.com"
   },
   "client": [
     {
@@ -26,7 +27,7 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:671098905742:android:efdb479631cd81c60955df",
+        "mobilesdk_app_id": "1:68980353446:android:cd174cc3696d32384c8767",
         "android_client_info": {
           "package_name": "com.example.user_iedc"
         }
@@ -34,7 +35,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyA4bJ8fNsjtOPbv9zyIV1FvwddKFdCzHdw"
+          "current_key": "AIzaSyB4ghGQuySgMEoihaHRjNg0PkFFkL8tRf4"
         }
       ],
       "services": {
