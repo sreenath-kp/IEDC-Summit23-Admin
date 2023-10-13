@@ -103,4 +103,14 @@ class WorkshopRepository {
     return _workshops.doc(workshopName).snapshots().map((event) =>
         Workshop.fromMap(event.data() as Map<String, dynamic>).attendees);
   }
+
+  Future<void> createCSV() async {
+    List<String> attendees = [];
+    await _workshops.doc().snapshots().map(
+      (event) {
+        attendees =
+            (Workshop.fromMap(event.data() as Map<String, dynamic>).attendees);
+      },
+    );
+  }
 }

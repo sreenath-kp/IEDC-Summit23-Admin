@@ -61,23 +61,27 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ],
                 ),
               ),
+              // HomeButton(
+              //   title: "Event Registration",
+              //   func: () {
+              //     Navigator.pushNamed(context, '/eventScanner');
+              //   },
+              // ),
+              // const SizedBox(
+              //   height: 40,
+              // ),
+              // HomeButton(
+              //   title: "Workshops",
+              //   func: () async {
+              //     Navigator.pushNamed(context, '/workshopsList');
+              //   },
+              // ),
+              // const SizedBox(
+              //   height: 40,
+              // ),
               HomeButton(
-                title: "Event Registration",
-                func: () {
-                  Navigator.pushNamed(context, '/eventScanner');
-                },
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              HomeButton(
-                title: "Workshops",
-                func: () async {
-                  Navigator.pushNamed(context, '/workshopsList');
-                },
-              ),
-              const SizedBox(
-                height: 40,
+                title: "create csv",
+                func: () {},
               ),
             ],
           ),
