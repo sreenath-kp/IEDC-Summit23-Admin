@@ -164,6 +164,7 @@ class WorkshopRepository {
             row.add(att.address);
             row.add(att.emergencyContact);
             row.add(att.districtOfResidence);
+            print(row);
             rows.add(row);
           },
         );
