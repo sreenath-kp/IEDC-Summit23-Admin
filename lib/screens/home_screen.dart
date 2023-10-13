@@ -79,15 +79,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               const SizedBox(
                 height: 40,
               ),
-              // HomeButton(
-              //   title: "Upload firebase",
-              //   func: () {
-              //     // TownscriptRepository(firestore: ref.watch(firestoreProvider))
-              //     //     .gettingData();
-              //     SanityRepo(firestore: ref.watch(firestoreProvider))
-              //         .gettingData();
-              //   },
-              // ),
             ],
           ),
         ),
