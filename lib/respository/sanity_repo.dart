@@ -23,29 +23,29 @@ class SanityRepo {
     }
   }
 
-  Future<void> gettingData() async {
-    // get data from sanity
-    final response = await http.get(
-      Uri.parse(
-          'https://i0p2y232.api.sanity.io/v2021-06-07/data/query/production?query=*[_type == "event"]{_id,event_name,start_time,end_time,speaker,status,category,venue,posterurl,maxcount}'),
-      headers: sanityHeader,
-    );
-    var sanityData = jsonDecode(response.body)['result'];
-    Workshop workshop;
-    for (var data in sanityData) {
-      workshop = Workshop(
-        title: data['event_name'],
-        startTime: data['start_time'],
-        endTime: data['end_time'],
-        speaker: data['speaker'],
-        description: data['status'],
-        posterUrl: data["posterurl"],
-        venue: data["venue"],
-        attendees: [],
-        preregistered: [],
-        max: data["maxcount"],
-      );
-      // uploadtoFirebase(workshop);
-    }
-  }
+  // Future<void> gettingData() async {
+  //   // get data from sanity
+  //   final response = await http.get(
+  //     Uri.parse(
+  //         'https://i0p2y232.api.sanity.io/v2021-06-07/data/query/production?query=*[_type == "event"]{_id,event_name,start_time,end_time,speaker,status,category,venue,posterurl,maxcount}'),
+  //     headers: sanityHeader,
+  //   );
+  //   var sanityData = jsonDecode(response.body)['result'];
+  //   Workshop workshop;
+  //   for (var data in sanityData) {
+  //     workshop = Workshop(
+  //       title: data['event_name'],
+  //       startTime: data['start_time'],
+  //       endTime: data['end_time'],
+  //       speaker: data['speaker'],
+  //       description: data['status'],
+  //       posterUrl: data["posterurl"],
+  //       venue: data["venue"],
+  //       attendees: [],
+  //       preregistered: [],
+  //       max: data["maxcount"],
+  //     );
+  //     // uploadtoFirebase(workshop);
+  //   }
+  // }
 }
