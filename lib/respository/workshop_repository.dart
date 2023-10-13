@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csv/csv.dart';
 import 'package:external_path/external_path.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:summit_admin_app/components/utils.dart';
 import 'package:summit_admin_app/models/attendee_model.dart';
 import 'package:summit_admin_app/models/workshop_model.dart';
 import 'package:summit_admin_app/providers/firebase_providers.dart';
@@ -120,7 +122,7 @@ class WorkshopRepository {
     );
   }
 
-  Future<void> printAttendeesForWorkshops() async {
+  Future<void> printAttendeesForWorkshops(BuildContext context) async {
     Map<Permission, PermissionStatus> statuses = await [
       Permission.storage,
     ].request();
@@ -149,7 +151,6 @@ class WorkshopRepository {
 
       for (final attendee in attendees) {
         final ticketID = attendee.split("*")[0];
-        print(ticketID);
         var atted =
             await _firestore.collection('attendees').doc(ticketID).get();
 
@@ -166,7 +167,6 @@ class WorkshopRepository {
         row.add(att.address);
         row.add(att.emergencyContact);
         row.add(att.districtOfResidence);
-        print(row);
         rows.add(row);
       }
       String csv = const ListToCsvConverter().convert(rows);
@@ -178,6 +178,80 @@ class WorkshopRepository {
 
       File f = File("$dir/${workshop.id}.csv");
       f.writeAsString(csv);
+      showSnackBar(context, "${workshop.id} : Done");
+      print("success");
+    }
+  }
+
+  Future<void> printAttendeesForWorkshops1(BuildContext context) async {
+    final status = await Permission.storage.request();
+    if (status.isDenied) {
+      // Handle permission denied
+      return;
+    }
+
+    if (status.isGranted) {
+      final workshopCollectionRef =
+          FirebaseFirestore.instance.collection('workshops');
+      final workshops = await workshopCollectionRef.get();
+
+      for (final workshop in workshops.docs) {
+        print('Workshop: ${workshop.id}');
+        List<String> attendees = [];
+        attendees = (Workshop.fromMap(workshop.data()).attendees);
+        List<List<dynamic>> row = [];
+
+        // Add header row
+        row.add([
+          "Name",
+          "Attendee_category",
+          "CollegeHasIEDC",
+          "Email",
+          "Mobile",
+          "Gender",
+          "Address",
+          "EmergencyContact",
+          "District of Residence"
+        ]);
+
+        for (final attendee in attendees) {
+          final ticketID = attendee.split("*")[0];
+          var atted =
+              await _firestore.collection('attendees').doc(ticketID).get();
+
+          Attendee att = Attendee.fromMap(atted.data() as Map<String, dynamic>);
+
+          // Add attendee data to the row
+          row.add([
+            att.name,
+            att.attendeeCategory,
+            att.collegeHasIEDC,
+            att.email,
+            att.mobile,
+            att.gender,
+            att.address,
+            att.emergencyContact,
+            att.districtOfResidence
+          ]);
+        }
+
+        String csv = const ListToCsvConverter().convert(row);
+        var dir = await ExternalPath.getExternalStoragePublicDirectory(
+            ExternalPath.DIRECTORY_DOWNLOADS);
+        String workshopName =
+            workshop.id.replaceAll(RegExp(r"[^a-zA-Z0-9]+"), "_");
+        String file = "$dir/$workshopName.csv";
+
+        try {
+          File f = File(file);
+          await f.writeAsString(csv);
+          showSnackBar(context, "${workshop.id} : Done");
+          print("Success: $file");
+        } catch (e) {
+          showSnackBar(context, "Error creating CSV for ${workshop.id}: $e");
+          print("Error: $e");
+        }
+      }
     }
   }
 }

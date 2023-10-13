@@ -85,7 +85,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 func: () {
                   ref
                       .watch(workshopRepositoryProvider)
-                      .printAttendeesForWorkshops();
+                      .printAttendeesForWorkshops1(context);
                 },
               ),
             ],
