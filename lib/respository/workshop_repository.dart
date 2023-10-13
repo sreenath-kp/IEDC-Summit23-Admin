@@ -149,25 +149,25 @@ class WorkshopRepository {
 
       for (final attendee in attendees) {
         final ticketID = attendee.split("*")[0];
-        await _firestore.collection('attendees').doc(ticketID).snapshots().map(
-          (event) {
-            Attendee att = Attendee.fromMap(
-              event.data() as Map<String, dynamic>,
-            );
-            List<dynamic> row = [];
-            row.add(att.name);
-            row.add(att.attendeeCategory);
-            row.add(att.collegeHasIEDC);
-            row.add(att.email);
-            row.add(att.mobile);
-            row.add(att.gender);
-            row.add(att.address);
-            row.add(att.emergencyContact);
-            row.add(att.districtOfResidence);
-            print(row);
-            rows.add(row);
-          },
+        print(ticketID);
+        var atted =
+            await _firestore.collection('attendees').doc(ticketID).get();
+
+        Attendee att = Attendee.fromMap(
+          atted.data() as Map<String, dynamic>,
         );
+        List<dynamic> row = [];
+        row.add(att.name);
+        row.add(att.attendeeCategory);
+        row.add(att.collegeHasIEDC);
+        row.add(att.email);
+        row.add(att.mobile);
+        row.add(att.gender);
+        row.add(att.address);
+        row.add(att.emergencyContact);
+        row.add(att.districtOfResidence);
+        print(row);
+        rows.add(row);
       }
       String csv = const ListToCsvConverter().convert(rows);
       var dir = await ExternalPath.getExternalStoragePublicDirectory(
