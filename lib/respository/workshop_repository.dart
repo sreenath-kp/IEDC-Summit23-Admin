@@ -1,8 +1,12 @@
 import 'dart:async';
+import 'dart:html';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:csv/csv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:summit_admin_app/models/attendee_model.dart';
 import 'package:summit_admin_app/models/workshop_model.dart';
 import 'package:summit_admin_app/providers/firebase_providers.dart';
+import 'package:summit_admin_app/respository/attendee_repository.dart';
 
 class Ws {
   final String wsName;
@@ -110,7 +114,57 @@ class WorkshopRepository {
       (event) {
         attendees =
             (Workshop.fromMap(event.data() as Map<String, dynamic>).attendees);
+        print(attendees);
       },
     );
+  }
+
+  Future<void> printAttendeesForWorkshops() async {
+    // Replace "workshopCollectionRef" with your Firestore collection reference to workshops.
+    final workshopCollectionRef =
+        FirebaseFirestore.instance.collection('workshops');
+
+    final workshops = await workshopCollectionRef.get();
+
+    for (final workshop in workshops.docs) {
+      print('Workshop: ${workshop.id}');
+      List<String> attendees = [];
+      attendees = (Workshop.fromMap(workshop.data()).attendees);
+      List<List<dynamic>> rows = [];
+      List<dynamic> row = [];
+      row.add("Name");
+      row.add("Attendee_category");
+      row.add("CollegeHasIEDC");
+      row.add("Email");
+      row.add("Mobile");
+      row.add("Gender");
+      row.add("Address");
+      row.add("EmergencyContact");
+      row.add("District of Residence");
+      rows.add(row);
+
+      for (final attendee in attendees) {
+        final ticketID = attendee.split("*")[0];
+        await _firestore.collection('attendees').doc(ticketID).snapshots().map(
+          (event) {
+            Attendee att = Attendee.fromMap(
+              event.data() as Map<String, dynamic>,
+            );
+            List<dynamic> row = [];
+            row.add(att.name);
+            row.add(att.attendeeCategory);
+            row.add(att.collegeHasIEDC);
+            row.add(att.email);
+            row.add(att.mobile);
+            row.add(att.gender);
+            row.add(att.address);
+            row.add(att.emergencyContact);
+            row.add(att.districtOfResidence);
+            rows.add(row);
+          },
+        );
+      }
+      String csv = const ListToCsvConverter().convert(rows);
+    }
   }
 }

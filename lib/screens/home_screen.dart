@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:summit_admin_app/components/home_button.dart';
 import 'package:summit_admin_app/components/home_screen_texts.dart';
 import 'package:summit_admin_app/controller/attendee_controller.dart';
+import 'package:summit_admin_app/respository/workshop_repository.dart';
 // import 'package:summit_admin_app/providers/firebase_providers.dart';
 // import 'package:summit_admin_app/respository/sanity_repo.dart';
 
@@ -81,7 +82,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               // ),
               HomeButton(
                 title: "create csv",
-                func: () {},
+                func: () {
+                  ref
+                      .watch(workshopRepositoryProvider)
+                      .printAttendeesForWorkshops();
+                },
               ),
             ],
           ),
