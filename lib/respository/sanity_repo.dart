@@ -45,7 +45,7 @@ class SanityRepo {
         preregistered: [],
         max: data["maxcount"],
       );
-      uploadtoFirebase(workshop);
+      // uploadtoFirebase(workshop);
     }
   }
 }
