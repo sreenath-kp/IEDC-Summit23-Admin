@@ -1,12 +1,13 @@
 import 'dart:async';
-import 'dart:html';
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csv/csv.dart';
+import 'package:external_path/external_path.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:summit_admin_app/models/attendee_model.dart';
 import 'package:summit_admin_app/models/workshop_model.dart';
 import 'package:summit_admin_app/providers/firebase_providers.dart';
-import 'package:summit_admin_app/respository/attendee_repository.dart';
 
 class Ws {
   final String wsName;
@@ -120,6 +121,9 @@ class WorkshopRepository {
   }
 
   Future<void> printAttendeesForWorkshops() async {
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.storage,
+    ].request();
     // Replace "workshopCollectionRef" with your Firestore collection reference to workshops.
     final workshopCollectionRef =
         FirebaseFirestore.instance.collection('workshops');
@@ -165,6 +169,14 @@ class WorkshopRepository {
         );
       }
       String csv = const ListToCsvConverter().convert(rows);
+      var dir = await ExternalPath.getExternalStoragePublicDirectory(
+          ExternalPath.DIRECTORY_DOWNLOADS);
+
+      print("dir $dir");
+      String file = dir;
+
+      File f = File("$dir/${workshop.id}.csv");
+      f.writeAsString(csv);
     }
   }
 }
