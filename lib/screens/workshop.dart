@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sanity_image_url/flutter_sanity_image_url.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:summit_admin_app/components/workshop_text_rich.dart';
-import 'package:summit_admin_app/constants/secret.dart';
 import 'package:summit_admin_app/models/workshop_model.dart';
 import 'package:summit_admin_app/screens/spot_admit_screen.dart';
 import 'package:summit_admin_app/screens/workshop_scanner.dart';
@@ -40,22 +38,7 @@ class WorkshopScreen extends StatelessWidget {
                     ), //Textstyle
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.25,
-                      child: Image.network(
-                        urlFor(SanityImage.fromJson(workshop.posterUrl))
-                            .size(200, 200)
-                            .url()
-                            .toString(),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                ), //CircleAvatar
+                //CircleAvatar
                 const SizedBox(
                   height: 10,
                 ),

@@ -1,8 +1,5 @@
-import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:summit_admin_app/constants/secret.dart';
 import 'package:summit_admin_app/models/workshop_model.dart';
-import 'package:http/http.dart' as http;
 
 class SanityRepo {
   final FirebaseFirestore _firestore;
