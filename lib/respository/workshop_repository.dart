@@ -202,17 +202,20 @@ class WorkshopRepository {
         List<List<dynamic>> row = [];
 
         // Add header row
-        row.add([
-          "Name",
-          "Attendee_category",
-          "CollegeHasIEDC",
-          "Email",
-          "Mobile",
-          "Gender",
-          "Address",
-          "EmergencyContact",
-          "District of Residence"
-        ]);
+        row.add(
+          [
+            "Name",
+            "Ticket ID"
+                "Attendee_category",
+            "CollegeHasIEDC",
+            "Email",
+            "Mobile",
+            "Gender",
+            "Address",
+            "EmergencyContact",
+            "District of Residence"
+          ],
+        );
 
         for (final attendee in attendees) {
           final ticketID = attendee.split("*")[0];
@@ -222,17 +225,20 @@ class WorkshopRepository {
           Attendee att = Attendee.fromMap(atted.data() as Map<String, dynamic>);
 
           // Add attendee data to the row
-          row.add([
-            att.name,
-            att.attendeeCategory,
-            att.collegeHasIEDC,
-            att.email,
-            att.mobile,
-            att.gender,
-            att.address,
-            att.emergencyContact,
-            att.districtOfResidence
-          ]);
+          row.add(
+            [
+              att.name,
+              att.iedcRegistrationNumber,
+              att.attendeeCategory,
+              att.collegeHasIEDC,
+              att.email,
+              att.mobile,
+              att.gender,
+              att.address,
+              att.emergencyContact,
+              att.districtOfResidence
+            ],
+          );
         }
 
         String csv = const ListToCsvConverter().convert(row);
