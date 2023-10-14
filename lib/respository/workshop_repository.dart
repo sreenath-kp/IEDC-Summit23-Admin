@@ -205,8 +205,8 @@ class WorkshopRepository {
         row.add(
           [
             "Name",
-            "Ticket ID"
-                "Attendee_category",
+            "Ticket ID",
+            "Attendee_category",
             "CollegeHasIEDC",
             "Email",
             "Mobile",
@@ -246,7 +246,7 @@ class WorkshopRepository {
             ExternalPath.DIRECTORY_DOWNLOADS);
         String workshopName =
             workshop.id.replaceAll(RegExp(r"[^a-zA-Z0-9]+"), "_");
-        String file = "$dir/$workshopName.csv";
+        String file = "$dir/${workshopName}_final.csv";
 
         try {
           File f = File(file);
