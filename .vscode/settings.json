@@ -1,3 +1,4 @@
 {
-  "java.configuration.updateBuildConfiguration": "interactive"
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "cmake.sourceDirectory": "E:/work/flutter_tutorial/IEDC-Summit23-Admin/build/windows/extracted/firebase_cpp_sdk_windows"
 }

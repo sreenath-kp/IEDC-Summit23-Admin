@@ -134,7 +134,7 @@ class _SpotAdmitScreenState extends ConsumerState<SpotAdmitScreen> {
                             .watch(workshopRepositoryProvider)
                             .addWorkshopAttendence(
                               widget.wsName,
-                              "${attendee.iedcRegistrationNumber} ${attendee.name}",
+                              "${attendee.iedcRegistrationNumber}*${attendee.name}",
                             );
 
                         showSnackBar(context, "Spot attendee added");

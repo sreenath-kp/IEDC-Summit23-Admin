@@ -124,7 +124,7 @@ class _WorkshopUserIDScreenState extends ConsumerState<WorkshopUserIDScreen> {
                           }
                           if (!_isApproved) {
                             _addAttendence(
-                                "${widget.id} ${attendee.name}", widget.wsName);
+                                "${widget.id}*${attendee.name}", widget.wsName);
                           } else {
                             widget.screenClosed();
                             Navigator.of(context).pop();

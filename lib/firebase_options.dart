@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -49,22 +46,30 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyCJyfqomITmmeZX9BDg-evO0P7AapsLRno',
+    appId: '1:671098905742:web:b1580af56e2cfb850955df',
+    messagingSenderId: '671098905742',
+    projectId: 'iedc-pro-app',
+    authDomain: 'iedc-pro-app.firebaseapp.com',
+    storageBucket: 'iedc-pro-app.appspot.com',
+    measurementId: 'G-HVTJ93SRVK',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB4ghGQuySgMEoihaHRjNg0PkFFkL8tRf4',
-    appId: '1:68980353446:android:da32ab9dff6decfd4c8767',
-    messagingSenderId: '68980353446',
-    projectId: 'iedc-app-6754b',
-    databaseURL: 'https://iedc-app-6754b-default-rtdb.firebaseio.com',
-    storageBucket: 'iedc-app-6754b.appspot.com',
+    apiKey: 'AIzaSyA4bJ8fNsjtOPbv9zyIV1FvwddKFdCzHdw',
+    appId: '1:671098905742:android:01fc21912920efd70955df',
+    messagingSenderId: '671098905742',
+    projectId: 'iedc-pro-app',
+    storageBucket: 'iedc-pro-app.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAKKfEe6pKwsqM-h15Pw0CfFr0rLvqEKSg',
-    appId: '1:68980353446:ios:5ce806f7d935206d4c8767',
-    messagingSenderId: '68980353446',
-    projectId: 'iedc-app-6754b',
-    databaseURL: 'https://iedc-app-6754b-default-rtdb.firebaseio.com',
-    storageBucket: 'iedc-app-6754b.appspot.com',
+    apiKey: 'AIzaSyC-mF8SC0Zv8zJTcKwtBUNEJTWCbMXfr4I',
+    appId: '1:671098905742:ios:5e61672d9abcbf060955df',
+    messagingSenderId: '671098905742',
+    projectId: 'iedc-pro-app',
+    storageBucket: 'iedc-pro-app.appspot.com',
     iosBundleId: 'com.example.summitAdminApp',
   );
 }

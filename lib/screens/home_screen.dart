@@ -4,9 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:summit_admin_app/components/home_button.dart';
 import 'package:summit_admin_app/components/home_screen_texts.dart';
 import 'package:summit_admin_app/controller/attendee_controller.dart';
-// import 'package:summit_admin_app/respository/sanity_repo.dart';
+import 'package:summit_admin_app/respository/workshop_repository.dart';
 // import 'package:summit_admin_app/providers/firebase_providers.dart';
-// import 'package:summit_admin_app/respository/townscript_repo.dart';
+// import 'package:summit_admin_app/respository/sanity_repo.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -39,18 +39,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           error: (e, s) => "?",
         );
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "IEDC-Summit",
-          style: GoogleFonts.dmSans(
-            fontSize: 25,
-            fontWeight: FontWeight.w500,
-            height: 0,
-          ),
-        ),
-        centerTitle: true,
-        elevation: 0,
-      ),
+      appBar: homeScreenAppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30.0),
         child: Center(
@@ -73,37 +62,51 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ],
                 ),
               ),
-              HomeButton(
-                title: "Event Registration",
-                func: () {
-                  Navigator.pushNamed(context, '/eventScanner');
-                },
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              HomeButton(
-                title: "Workshops",
-                func: () {
-                  Navigator.pushNamed(context, '/workshopsList');
-                },
-              ),
-              const SizedBox(
-                height: 40,
-              ),
               // HomeButton(
-              //   title: "Upload firebase",
+              //   title: "Event Registration",
               //   func: () {
-              //     TownscriptRepository(firestore: ref.watch(firestoreProvider))
-              //         .gettingData();
-              //     SanityRepo(firestore: ref.watch(firestoreProvider))
-              //         .gettingData();
+              //     Navigator.pushNamed(context, '/eventScanner');
               //   },
               // ),
+              // const SizedBox(
+              //   height: 40,
+              // ),
+              // HomeButton(
+              //   title: "Workshops",
+              //   func: () async {
+              //     Navigator.pushNamed(context, '/workshopsList');
+              //   },
+              // ),
+              // const SizedBox(
+              //   height: 40,
+              // ),
+              HomeButton(
+                title: "create csv",
+                func: () {
+                  ref
+                      .watch(workshopRepositoryProvider)
+                      .printAttendeesForWorkshops1(context);
+                },
+              ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  AppBar homeScreenAppBar() {
+    return AppBar(
+      title: Text(
+        "IEDC-Summit",
+        style: GoogleFonts.dmSans(
+          fontSize: 25,
+          fontWeight: FontWeight.w500,
+          height: 0,
+        ),
+      ),
+      centerTitle: true,
+      elevation: 0,
     );
   }
 }

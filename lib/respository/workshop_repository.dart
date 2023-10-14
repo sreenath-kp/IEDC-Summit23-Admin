@@ -1,6 +1,13 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:csv/csv.dart';
+import 'package:external_path/external_path.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:summit_admin_app/components/utils.dart';
+import 'package:summit_admin_app/models/attendee_model.dart';
 import 'package:summit_admin_app/models/workshop_model.dart';
 import 'package:summit_admin_app/providers/firebase_providers.dart';
 
@@ -37,13 +44,14 @@ class WorkshopRepository {
 
   Stream<List<Workshop>> getWorkshops() {
     return _workshops.snapshots().map(
-          (event) => event.docs
-              .map(
-                (e) => Workshop.fromMap(
-                  e.data() as Map<String, dynamic>,
-                ),
-              )
-              .toList(),
+          (event) => event.docs.map(
+            (e) {
+              Workshop workshop = Workshop.fromMap(
+                e.data() as Map<String, dynamic>,
+              );
+              return workshop;
+            },
+          ).toList(),
         );
   }
 
@@ -101,5 +109,155 @@ class WorkshopRepository {
   Stream<List<String>> getWorkshopAttendees(String workshopName) {
     return _workshops.doc(workshopName).snapshots().map((event) =>
         Workshop.fromMap(event.data() as Map<String, dynamic>).attendees);
+  }
+
+  Future<void> createCSV() async {
+    List<String> attendees = [];
+    await _workshops.doc().snapshots().map(
+      (event) {
+        attendees =
+            (Workshop.fromMap(event.data() as Map<String, dynamic>).attendees);
+        print(attendees);
+      },
+    );
+  }
+
+  Future<void> printAttendeesForWorkshops(BuildContext context) async {
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.storage,
+    ].request();
+    // Replace "workshopCollectionRef" with your Firestore collection reference to workshops.
+    final workshopCollectionRef =
+        FirebaseFirestore.instance.collection('workshops');
+
+    final workshops = await workshopCollectionRef.get();
+
+    for (final workshop in workshops.docs) {
+      print('Workshop: ${workshop.id}');
+      List<String> attendees = [];
+      attendees = (Workshop.fromMap(workshop.data()).attendees);
+      List<List<dynamic>> rows = [];
+      List<dynamic> row = [];
+      row.add("Name");
+      row.add("Attendee_category");
+      row.add("CollegeHasIEDC");
+      row.add("Email");
+      row.add("Mobile");
+      row.add("Gender");
+      row.add("Address");
+      row.add("EmergencyContact");
+      row.add("District of Residence");
+      rows.add(row);
+
+      for (final attendee in attendees) {
+        final ticketID = attendee.split("*")[0];
+        var atted =
+            await _firestore.collection('attendees').doc(ticketID).get();
+
+        Attendee att = Attendee.fromMap(
+          atted.data() as Map<String, dynamic>,
+        );
+        List<dynamic> row = [];
+        row.add(att.name);
+        row.add(att.attendeeCategory);
+        row.add(att.collegeHasIEDC);
+        row.add(att.email);
+        row.add(att.mobile);
+        row.add(att.gender);
+        row.add(att.address);
+        row.add(att.emergencyContact);
+        row.add(att.districtOfResidence);
+        rows.add(row);
+      }
+      String csv = const ListToCsvConverter().convert(rows);
+      var dir = await ExternalPath.getExternalStoragePublicDirectory(
+          ExternalPath.DIRECTORY_DOWNLOADS);
+
+      print("dir $dir");
+      String file = dir;
+
+      File f = File("$dir/${workshop.id}.csv");
+      f.writeAsString(csv);
+      showSnackBar(context, "${workshop.id} : Done");
+      print("success");
+    }
+  }
+
+  Future<void> printAttendeesForWorkshops1(BuildContext context) async {
+    final status = await Permission.storage.request();
+    if (status.isDenied) {
+      // Handle permission denied
+      return;
+    }
+
+    if (status.isGranted) {
+      final workshopCollectionRef =
+          FirebaseFirestore.instance.collection('workshops');
+      final workshops = await workshopCollectionRef.get();
+
+      for (final workshop in workshops.docs) {
+        print('Workshop: ${workshop.id}');
+        List<String> attendees = [];
+        attendees = (Workshop.fromMap(workshop.data()).attendees);
+        List<List<dynamic>> row = [];
+
+        // Add header row
+        row.add(
+          [
+            "Name",
+            "Ticket ID",
+            "Attendee_category",
+            "CollegeHasIEDC",
+            "Email",
+            "Mobile",
+            "Gender",
+            "Address",
+            "EmergencyContact",
+            "District of Residence"
+          ],
+        );
+
+        for (final attendee in attendees) {
+          final ticketID = attendee.split("*")[0];
+          var atted =
+              await _firestore.collection('attendees').doc(ticketID).get();
+
+          Attendee att = Attendee.fromMap(atted.data() as Map<String, dynamic>);
+
+          // Add attendee data to the row
+          row.add(
+            [
+              att.name,
+              att.iedcRegistrationNumber,
+              att.attendeeCategory,
+              att.collegeHasIEDC,
+              att.email,
+              att.mobile,
+              att.gender,
+              att.address,
+              att.emergencyContact,
+              att.districtOfResidence
+            ],
+          );
+        }
+
+        String csv = const ListToCsvConverter().convert(row);
+        var dir = await ExternalPath.getExternalStoragePublicDirectory(
+            ExternalPath.DIRECTORY_DOWNLOADS);
+        String workshopName =
+            workshop.id.replaceAll(RegExp(r"[^a-zA-Z0-9]+"), "_");
+        String file = "$dir/${workshopName}_final.csv";
+
+        try {
+          File f = File(file);
+          await f.writeAsString(csv);
+          showSnackBar(context, "${workshop.id} : Done");
+          print("Success: $file");
+        } catch (e) {
+          showSnackBar(context, "Error creating CSV for ${workshop.id}: $e");
+          print("Error: $e");
+        }
+      }
+    }
   }
 }
